@@ -21,8 +21,8 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 alias gcc='gcc-4.9'
 
-alias forward-mysql="ssh -C -N -f -L 33306:127.0.0.1:13306 gw-jp.pairs.lv"
-alias mysql-stage="ssh -C -N -f -L 23306:dbm01-stage.c1zaysb7l4em.ap-northeast-1.rds.amazonaws.com:3306 nakagawa@gw-stage.pairs.lv"
+#alias forward-mysql=""
+#alias mysql-stage=""
  
 # ヒストリの設定
 HISTFILE=~/.zsh_history
