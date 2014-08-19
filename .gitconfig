@@ -10,25 +10,44 @@
         st = status
         sh = show
         ft = fetch
+        ss = stash
 # log (lg)
-        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lga = log --graph --date=iso --name-status --pretty=format:'%C(red)%h %C(green)%an %C(blue)%ad %Creset%s %C(yellow)%d%Creset'
         story = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
 # branch (b)
         br  = branch
-        ba  = branch -a
-# commit (c)
-        c   = commit
-        ca  = commit -a
-        cm  = commit -m
+        bra = branch -a
+        brr = branch -r
+        brd = branch -d
 # checkout (ch)
         ch  = checkout
         chb = checkout -b
         chm = checkout master
         chd = checkout develop
 # pull (pl)
-        pl = pull
+        pl  = pull
         plo = pull origin
+        pld = pull develop
 # push (ps)
-        ps = push
+        ps  = push
         pso = push origin
+        psd = push develop
+# commit (c)
+        c   = commit
+        ca  = commit -a
+        cm  = commit -m
+# rebase (rb)
+        rbm = rebase master
+        rbd = rebase develop
+        rbi = rebase -i
+        rbc = rebase --continue
+        rba = rebase --abort
+# cherry-pick (chpk)
+        chpk = cherry-pick
+# revert (rv)
+        rv  = revert
+        rvh = revert HEAD
+# reset (rs)
+        rs  = reset
+        rsh = reset --hard
