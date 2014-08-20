@@ -44,5 +44,11 @@ setopt no_flow_control
  
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
- 
-# vim:set ft=zsh :
+
+# grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='00;36'
+
+# prompt
+PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
+RPROMPT='[%F{blue}%d%f]'
