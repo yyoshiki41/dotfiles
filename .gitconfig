@@ -15,7 +15,7 @@
         lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lga = log --graph --date=iso --name-status --pretty=format:'%C(red)%h %C(green)%an %C(blue)%ad %Creset%s %C(yellow)%d%Creset'
         story = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
-# branch (b)
+# branch (br)
         br  = branch
         bra = branch -a
         brr = branch -r

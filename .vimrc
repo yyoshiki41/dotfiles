@@ -11,12 +11,16 @@ set nocompatible
 set autoread
 
 " マウスが使える
-set mouse=a
-set guioptions+=a
-set ttymouse=xterm2
+"set mouse=a
+"set guioptions+=a
+"set ttymouse=xterm2
+
+" beep音を消す
+set vb t_vb=
+set novisualbell
 
 " 行番号表示
-set number 
+set number
 " モード表示
 set showmode
 " 編集中のファイル名を表示
@@ -50,6 +54,9 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 " フォーマット揃えをコメント以外有効にする
 set formatoptions-=c
 
+" vを二回で行末まで選択
+vnoremap v $h
+
 " 検索結果をハイライトする
 set hlsearch
 " 検索文字を打ち込むと即検索する
@@ -62,3 +69,13 @@ set smartcase
 set wrapscan
 " 検索文字列入力時に順次対象文字列にヒットさせない
 set noincsearch
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+" TABにて対応ペアにジャンプ
+nnoremap &lt;Tab&gt; %
+vnoremap &lt;Tab&gt; %
