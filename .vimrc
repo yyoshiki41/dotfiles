@@ -1,81 +1,121 @@
 scriptencoding utf-8
-" fileタイプに応じて挙動,色を変える
+" fileタイプに応じて挙動, 色を変える
 syntax on
 filetype plugin on
 filetype indent on
-" ターミナル接続を高速にする
+" terminal接続を高速にする
 set ttyfast
-" VIM互換にしない
+" VIM 互換にしない
 set nocompatible
 " 内容が変更されたら自動的に再読み込み
 set autoread
-
-" マウスが使える
-"set mouse=a
-"set guioptions+=a
-"set ttymouse=xterm2
-
 " beep音を消す
 set vb t_vb=
 set novisualbell
+" swapfileを作らない
+set noswapfile
+" insert mode をぬけるとIMEオフ
+set noimdisable
+set iminsert=0 imsearch=0
+set noimcmdline
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+" fileを開いた際に、前回終了時の行で起動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" view
 " 行番号表示
 set number
-" モード表示
+" mode 表示
 set showmode
-" 編集中のファイル名を表示
+" 編集中のfile名を表示
 set title
-" rulerの表示
+" ruler を表示
 set ruler
-" カーソルラインを表示する
+" カーソルラインを表示
 set cursorline
 " ステータスラインを常に表示
 set laststatus=2
-" 入力中のコマンドをステータスに表示する
+" 入力中のコマンドをステータスに表示
 set showcmd
-" 括弧入力時の対応する括弧を表示
+" カーソル下の括弧に対応するものをhighlight
 set showmatch
-" fileを開いた際に、前回終了時の行で起動
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-" swapfileを作らない
-set noswapfile
-
-" オートインデント
+" autoindent
 set smartindent
 set autoindent
-
-" tab設定
+" コメント以外はフォーマット揃えを有効
+set formatoptions-=c
+" tab 設定
 set noexpandtab
-" tabは半角4文字分のスペース
+" tab は半角4文字分のスペース
 set ts=4 sw=4 sts=0
-" tab,EOFなどを可視化
+" tab, EOFなどを可視化
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
-" フォーマット揃えをコメント以外有効にする
-set formatoptions-=c
 
-" vを二回で行末まで選択
+" normal mode
+" CTRL-hjkl でwindow移動
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+" space で画面移動
+nnoremap <SPACE>   <PageDown>
+nnoremap <S-SPACE> <PageUp>
+" scroll 時の余白行数
+set scrolloff=5
+" 0 で行頭, 9で行末
+nmap 0 ^
+nmap 9 $
+" tab で対応ペアに移動
+nnoremap <Tab> %
+vnoremap <Tab> %
+" v 2回で行末まで選択
 vnoremap v $h
+" カーソルから行頭まで削除
+nnoremap <silent> <C-k> d0
+" カーソルから行末まで削除
+nnoremap <silent> <C-d> d$
 
-" 検索結果をハイライトする
-set hlsearch
-" 検索文字を打ち込むと即検索する
+" insert mode
+" j 2回でescape
+inoremap jj <Esc>
+" brackets, quotation mark を自動補完
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+vnoremap { "zdi^V{<C-R>z}<ESC>
+vnoremap [ "zdi^V[<C-R>z]<ESC>
+vnoremap ( "zdi^V(<C-R>z)<ESC>
+vnoremap " "zdi^V"<C-R>z^V"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+" コンマ入力後に空白
+inoremap , ,<Space>
+" カーソルから行頭まで削除
+inoremap <silent> <C-k> <Esc>lc^
+" カーソルから行末まで削除
+inoremap <silent> <C-d> <Esc>lc$
+
+" search
+" incremental search
 set incsearch
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+" 検索文字列が小文字の場合は大文字小文字を区別しない
 set ignorecase
-" 検索文字列に大文字が含まれている場合は区別して検索する
+" 検索文字列に大文字が含まれている場合は区別する
 set smartcase
-" 検索時に最後まで行ったら最初に戻る
-set wrapscan
-" 検索文字列入力時に順次対象文字列にヒットさせない
-set noincsearch
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+" highlight
+set hlsearch
+" Esc 2回でhighlightをclear
+nnoremap <Esc><Esc> :nohlsearch<CR>
+" // で選択した文字列を検索
+vnoremap <silent> // y/<C-R>=escape(@",  '\\/.*$^~[]')<CR><CR>
+" 検索単語を画面中央に表示
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
-" TABにて対応ペアにジャンプ
-nnoremap &lt;Tab&gt; %
-vnoremap &lt;Tab&gt; %
+" 最後までいったら最初に戻る
+set wrapscan
