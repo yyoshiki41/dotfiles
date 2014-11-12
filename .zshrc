@@ -45,6 +45,11 @@ setopt auto_cd
 # 出力時8ビットを通す
 setopt print_eight_bit
 
+# grep
+alias gr='grep'
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='00;36'
+
 # historyの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -55,10 +60,6 @@ setopt hist_ignore_dups
 setopt hist_expand
 # historyを共有
 setopt share_history
-
-# grep
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='00;36'
 
 # emacs 風キーバインドにする
 bindkey -e
