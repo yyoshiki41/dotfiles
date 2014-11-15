@@ -56,9 +56,6 @@ set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " normal mode
-" <C-j> 2回でescape
-noremap <C-j><C-j> <ESC>
-noremap! <C-j><C-j> <ESC>
 " CTRL-hjkl でwindow移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -78,7 +75,7 @@ vnoremap <Tab> %
 " v 2回で行末まで選択
 vnoremap v $h
 " cursorから行末まで削除
-nnoremap <silent> <C-d> d$
+nnoremap <silent> <C-k> d$
 
 " tabline
 " t 2回でtabedit を開く
@@ -117,8 +114,6 @@ endfor
 nnoremap tm :<C-u>tabm<Space>
 
 " insert mode
-" j 2回でescape
-inoremap jj <ESC>
 " brackets, quotation mark を自動補完
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -132,14 +127,24 @@ vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 " コンマ入力後に空白
 inoremap , ,<Space>
-" cursorから行頭まで削除
-inoremap <silent> <C-k> <Esc>lc^
-" cursorから行末まで削除
-inoremap <silent> <C-d> <Esc>lc$
+" emacs key bindings
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-d> <Del>
+inoremap <C-k> <Esc>lc$
 
 " command-line
 " % 2回で、アクティブなバッファのpath展開
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" emacs key bindings
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
 " search
 " incremental search
