@@ -40,7 +40,7 @@ alias gls='gls --color'
 setopt auto_pushd
 # 重複したディレクトリを追加しない
 setopt pushd_ignore_dups
-# ディレクトリ名で cd
+# direcory名で移動
 setopt auto_cd
 # 出力時8ビットを通す
 setopt print_eight_bit

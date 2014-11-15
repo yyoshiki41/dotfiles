@@ -106,7 +106,7 @@ inoremap <silent> <C-k> <Esc>lc^
 " cursorから行末まで削除
 inoremap <silent> <C-d> <Esc>lc$
 
-" command-line mode
+" command-line
 " % 2回で、アクティブなバッファのpath展開
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
