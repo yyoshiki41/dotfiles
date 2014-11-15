@@ -62,8 +62,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 " space で画面移動
-nnoremap <SPACE>   <PageDown>
-nnoremap <S-SPACE> <PageUp>
+nnoremap <SPACE> <PageDown>
 " scroll 時の余白行数
 set scrolloff=5
 " 0 で行頭, 9で行末
