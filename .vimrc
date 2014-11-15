@@ -13,6 +13,10 @@ set vb t_vb=
 set novisualbell
 " swapfileを作らない
 set noswapfile
+" OS のclipbord を使えるようにする
+set clipboard=unnamed,autoselect
+" backspace で消せるようにする
+set backspace=start,eol,indent
 " insert mode をぬけるとIMEオフ
 set noimdisable
 set iminsert=0 imsearch=0
