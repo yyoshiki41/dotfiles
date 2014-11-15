@@ -1,8 +1,7 @@
 scriptencoding utf-8
-" fileタイプに応じて挙動, 色を変える
 syntax on
-filetype plugin on
 filetype indent on
+filetype plugin on
 " terminal接続を高速にする
 set ttyfast
 " VIM 互換にしない
@@ -31,13 +30,13 @@ set showmode
 set title
 " ruler を表示
 set ruler
-" カーソルラインを表示
+" cursor ラインを表示
 set cursorline
 " ステータスラインを常に表示
 set laststatus=2
 " 入力中のコマンドをステータスに表示
 set showcmd
-" カーソル下の括弧に対応するものをhighlight
+" cursor下の括弧に対応するものをhighlight
 set showmatch
 " autoindent
 set smartindent
@@ -53,6 +52,18 @@ set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " normal mode
+" <C-j> 2回でescape
+noremap <C-j><C-j> <ESC>
+noremap! <C-j><C-j> <ESC>
+" t 2回でtabedit を開く
+nnoremap tt :<C-u>tabe<Space>
+" t* でtab移動
+nnoremap <silent> <C-n> gt
+nnoremap <silent> <C-p> gT
+nnoremap <silent> tf :tabfirst<CR>
+nnoremap <silent> tl :tablast<CR>
+" move tab
+nnoremap tm :<C-u>tabm<Space>
 " CTRL-hjkl でwindow移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -71,14 +82,12 @@ nnoremap <Tab> %
 vnoremap <Tab> %
 " v 2回で行末まで選択
 vnoremap v $h
-" カーソルから行頭まで削除
-nnoremap <silent> <C-k> d0
-" カーソルから行末まで削除
+" cursorから行末まで削除
 nnoremap <silent> <C-d> d$
 
 " insert mode
 " j 2回でescape
-inoremap jj <Esc>
+inoremap jj <ESC>
 " brackets, quotation mark を自動補完
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -92,10 +101,14 @@ vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 " コンマ入力後に空白
 inoremap , ,<Space>
-" カーソルから行頭まで削除
+" cursorから行頭まで削除
 inoremap <silent> <C-k> <Esc>lc^
-" カーソルから行末まで削除
+" cursorから行末まで削除
 inoremap <silent> <C-d> <Esc>lc$
+
+" command-line mode
+" % 2回で、アクティブなバッファのpath展開
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " search
 " incremental search
@@ -107,9 +120,9 @@ set smartcase
 " highlight
 set hlsearch
 " Esc 2回でhighlightをclear
-nnoremap <Esc><Esc> :nohlsearch<CR>
-" // で選択した文字列を検索
-vnoremap <silent> // y/<C-R>=escape(@",  '\\/.*$^~[]')<CR><CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+" / 2回で選択した文字列を検索
+vnoremap // y/<C-R>=escape(@",  '\\/.*$^~[]')<CR><CR>
 " 検索単語を画面中央に表示
 nnoremap n nzz
 nnoremap N Nzz
