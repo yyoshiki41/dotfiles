@@ -4,6 +4,8 @@ filetype indent on
 filetype plugin on
 " terminal接続を高速にする
 set ttyfast
+" 前回終了時のcursor 位置で起動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 " VIM 互換にしない
 set nocompatible
 " 内容が変更されたら自動的に再読み込み
@@ -22,10 +24,8 @@ set noimdisable
 set iminsert=0 imsearch=0
 set noimcmdline
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-" fileを開いた際に、前回終了時の行で起動
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
-" view
+" display
 " 行番号表示
 set number
 " mode 表示
@@ -59,15 +59,6 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 " <C-j> 2回でescape
 noremap <C-j><C-j> <ESC>
 noremap! <C-j><C-j> <ESC>
-" t 2回でtabedit を開く
-nnoremap tt :<C-u>tabe<Space>
-" t* でtab移動
-nnoremap <silent> <C-n> gt
-nnoremap <silent> <C-p> gT
-nnoremap <silent> tf :tabfirst<CR>
-nnoremap <silent> tl :tablast<CR>
-" move tab
-nnoremap tm :<C-u>tabm<Space>
 " CTRL-hjkl でwindow移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -88,6 +79,42 @@ vnoremap <Tab> %
 vnoremap v $h
 " cursorから行末まで削除
 nnoremap <silent> <C-d> d$
+
+" tabline
+" t 2回でtabedit を開く
+nnoremap tt :<C-u>tabe<Space>
+" show tabline
+set showtabline=2
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'),  '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+function! s:tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= i . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'tabline()'
+" t* でtab移動
+nnoremap <silent> <C-n> gt
+nnoremap <silent> <C-p> gT
+nnoremap <silent> tf :tabfirst<CR>
+nnoremap <silent> tl :tablast<CR>
+for n in range(1, 9)
+  execute 'nnoremap <silent> t'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" move tab  ※(引数+1)番目に移動
+nnoremap tm :<C-u>tabm<Space>
 
 " insert mode
 " j 2回でescape
