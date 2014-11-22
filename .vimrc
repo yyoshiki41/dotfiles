@@ -16,7 +16,7 @@ set novisualbell
 " swapfileを作らない
 set noswapfile
 " OS のclipbord を使えるようにする
-set clipboard=unnamed,autoselect
+set clipboard=unnamed
 " backspace で消せるようにする
 set backspace=start,eol,indent
 " insert mode をぬけるとIMEオフ
@@ -133,6 +133,20 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-d> <Del>
 inoremap <C-k> <Esc>lc$
+" command+p 時に、autoindent off
+if &term =~ "xterm"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+  function XTermPasteBegin(ret)
+    set paste
+    return a:ret
+  endfunction
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
+endif
 
 " command-line
 " % 2回で、アクティブなバッファのpath展開
