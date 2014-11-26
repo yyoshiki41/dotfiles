@@ -12,10 +12,17 @@ setopt no_flow_control
 setopt correct
 # emacs 風キーバインドにする
 bindkey -e
-
 # prompt
 PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
 RPROMPT='[%F{blue}%d%f]'
+
+# For zsh-completions
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+# 補完機能を有効にする
+autoload -Uz compinit
+compinit -u
 
 # cd したら自動的にpushdする
 setopt auto_pushd
@@ -24,9 +31,6 @@ setopt pushd_ignore_dups
 # direcory名で移動
 setopt auto_cd
 
-# 補完機能を有効にする
-autoload -Uz compinit
-compinit
 
 # global alias
 alias v='/usr/bin/vim'
