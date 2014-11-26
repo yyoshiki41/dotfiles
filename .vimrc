@@ -10,13 +10,13 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 set nocompatible
 " 内容が変更されたら自動的に再読み込み
 set autoread
-" beep音を消す
-set vb t_vb=
-set novisualbell
+" beep音
+set visualbell t_vb=
+set noerrorbells
 " swapfileを作らない
 set noswapfile
 " OS のclipbord を使えるようにする
-set clipboard=unnamed
+" set clipboard=unnamed
 " backspace で消せるようにする
 set backspace=start,eol,indent
 " insert mode をぬけるとIMEオフ
@@ -56,6 +56,9 @@ set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " normal mode
+" remaping
+nnoremap ; :
+nnoremap : ;
 " CTRL-hjkl でwindow移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -119,11 +122,6 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
 " コンマ入力後に空白
 inoremap , ,<Space>
 " emacs key bindings
@@ -158,6 +156,16 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
+
+" visual mode
+" 選択範囲をbrackets, quotation mark で括る
+vnoremap { "zdi{<C-R>z}<ESC>
+vnoremap [ "zdi[<C-R>z]<ESC>
+vnoremap ( "zdi(<C-R>z)<ESC>
+vnoremap " "zdi"<C-R>z"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+" yank後にcursor位置をそのままに
+vnoremap y y`>
 
 " search
 " incremental search

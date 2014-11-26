@@ -8,9 +8,11 @@
 [alias]
         alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
         st = status
+        di = diff
         sh = show
         ft = fetch
         ss = stash
+        blL = blame -L
 # log (lg)
         lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lga = log --graph --date=iso --name-status --pretty=format:'%C(red)%h %C(green)%an %C(blue)%ad %Creset%s %C(yellow)%d%Creset'
@@ -26,17 +28,19 @@
         chm = checkout master
         chd = checkout develop
 # pull (pl)
-        pl  = pull
-        plo = pull origin
-        pld = pull develop
+        pl   = pull
+        plo  = pull origin
+        pld  = pull develop
+        plod = pull origin develop
+        plom = pull origin master
 # push (ps)
         ps  = push
         pso = push origin
         psd = push develop
 # commit (c)
-        c   = commit
-        ca  = commit -a
-        cm  = commit -m
+        c  = commit
+        ca = commit -a
+        cm = commit -m
 # rebase (rb)
         rbm = rebase master
         rbd = rebase develop
@@ -51,12 +55,3 @@
 # reset (rs)
         rs  = reset
         rsh = reset --hard
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
