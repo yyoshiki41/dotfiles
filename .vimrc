@@ -77,7 +77,7 @@ vnoremap <Tab> %
 " v 2回で行末まで選択
 vnoremap v $h
 " cursorから行末まで削除
-nnoremap <silent> <C-k> d$
+"nnoremap <silent> <C-k> d$
 
 " tabline
 " t 2回でtabedit を開く
