@@ -31,7 +31,6 @@ setopt pushd_ignore_dups
 # direcory名で移動
 setopt auto_cd
 
-
 # global alias
 alias v='/usr/bin/vim'
 alias gcc='gcc-4.9'
@@ -42,6 +41,7 @@ alias -g G='| grep'
 # apache
 alias apstart='sudo apachectl start'
 alias aprestart='sudo apachectl restart'
+alias apgraceful='sudo apachectl graceful'
 alias apstop='sudo apachectl stop'
 
 # List direcory contents

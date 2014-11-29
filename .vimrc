@@ -17,6 +17,8 @@ set noerrorbells
 set noswapfile
 " OS のclipbord を使えるようにする
 " set clipboard=unnamed
+" colors
+set t_Co=256
 " backspace で消せるようにする
 set backspace=start,eol,indent
 " insert mode をぬけるとIMEオフ
@@ -25,7 +27,7 @@ set iminsert=0 imsearch=0
 set noimcmdline
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
-" display
+" ---display---
 " 行番号表示
 set number
 " mode 表示
@@ -54,8 +56,11 @@ set ts=4 sw=4 sts=0
 " tab, EOFなどを可視化
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
+" 全角spaceを　で表示
+highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
+au BufRead,BufNew * match JpSpace /　/
 
-" normal mode
+" ---normal mode---
 " remaping
 nnoremap ; :
 nnoremap : ;
@@ -64,9 +69,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
-" space で画面移動
+" space でwindow移動
+nnoremap <S-SPACE> <PageUp>
 nnoremap <SPACE> <PageDown>
-" scroll 時の余白行数
+"n scroll 時の余白行数
 set scrolloff=5
 " 0 で行頭, 9で行末
 nmap 0 ^
@@ -76,10 +82,8 @@ nnoremap <Tab> %
 vnoremap <Tab> %
 " v 2回で行末まで選択
 vnoremap v $h
-" cursorから行末まで削除
-nnoremap <silent> <C-k> d$
 
-" tabline
+" ---tabline---
 " t 2回でtabedit を開く
 nnoremap tt :<C-u>tabe<Space>
 " show tabline
@@ -115,7 +119,7 @@ endfor
 " move tab  ※(引数+1)番目に移動
 nnoremap tm :<C-u>tabm<Space>
 
-" insert mode
+" ---insert mode---
 " brackets, quotation mark を自動補完
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -146,7 +150,7 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[201~ <nop>
 endif
 
-" command-line
+" ---command-line---
 " % 2回で、アクティブなバッファのpath展開
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " emacs key bindings
@@ -157,7 +161,7 @@ cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
-" visual mode
+" ---visual mode---
 " 選択範囲をbrackets, quotation mark で括る
 vnoremap { "zdi{<C-R>z}<ESC>
 vnoremap [ "zdi[<C-R>z]<ESC>
@@ -167,7 +171,7 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 " yank後にcursor位置をそのままに
 vnoremap y y`>
 
-" search
+" ---search---
 " incremental search
 set incsearch
 " 検索文字列が小文字の場合は大文字小文字を区別しない
