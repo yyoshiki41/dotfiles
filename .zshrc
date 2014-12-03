@@ -12,9 +12,10 @@ setopt no_flow_control
 setopt correct
 # emacs 風キーバインドにする
 bindkey -e
+# colors
+autoload -U colors && colors
 # prompt
 PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
-RPROMPT='[%F{blue}%d%f]'
 
 # For zsh-completions
 if [ -e /usr/local/share/zsh-completions ]; then
@@ -24,12 +25,20 @@ fi
 autoload -Uz compinit
 compinit -u
 
+# direcory名で移動
+setopt auto_cd
+# 自動でリストアップ
+setopt auto_list
 # cd したら自動的にpushdする
 setopt auto_pushd
 # 重複したディレクトリを追加しない
 setopt pushd_ignore_dups
-# direcory名で移動
-setopt auto_cd
+# Directory stack
+# $ cd -num
+DIRSTACKSIZE=10
+zstyle ':completion:*' menu select
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
 # global alias
 alias v='/usr/bin/vim'
@@ -69,6 +78,19 @@ setopt hist_ignore_dups
 setopt hist_expand
 # historyを共有
 setopt share_history
+
+# vcs_info
+autoload -Uz vcs_info
+# [current directory][git status]
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # pyenv
 if which pyenv > /dev/null; then
