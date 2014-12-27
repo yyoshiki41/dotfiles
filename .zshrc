@@ -91,10 +91,3 @@ zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
-
-# pyenv
-if which pyenv > /dev/null; then
-    export PYENV_ROOT="${HOME}/.pyenv"
-    export PATH=${PYENV_ROOT}/shims:${PATH}
-    eval "$(pyenv init -)";
-fi
