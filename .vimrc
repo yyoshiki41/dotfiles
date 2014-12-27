@@ -6,8 +6,6 @@ filetype plugin on
 set ttyfast
 " 前回終了時のcursor 位置で起動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-" VIM 互換にしない
-set nocompatible
 " 内容が変更されたら自動的に再読み込み
 set autoread
 " beep音
@@ -26,8 +24,8 @@ set noimcmdline
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 " spell check
 set spell
-hi clear SpellBad
-hi SpellBad ctermbg=234 guibg=234
+highlight clear SpellBad
+highlight SpellBad ctermbg=234 guibg=234
 " spell check から日本語を除外
 set spelllang+=cjk
 fun! s:SpellConf()
@@ -48,6 +46,9 @@ augroup spell_check
   autocmd!
   autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
 augroup END
+" for markdown
+set syntax=markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
 
 " ---display---
 " colors
@@ -62,7 +63,10 @@ set title
 set ruler
 " Show cursor line
 set cursorline
-hi CursorLineNr term=bold ctermfg=red
+highlight CursorLineNr term=bold ctermfg=red
+" 全角spaceを　で表示
+highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
+autocmd BufRead,BufNew * match JpSpace /　/
 " Show cursor line (Only current window)
 augroup cch
   autocmd! cch
@@ -90,9 +94,6 @@ set ts=4 sw=4 sts=0
 " tab, EOFなどを可視化
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
-" 全角spaceを　で表示
-highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
-au BufRead,BufNew * match JpSpace /　/
 
 " ---normal mode---
 " remaping
@@ -111,8 +112,8 @@ nnoremap <SPACE> <PageDown>
 " scroll 時の余白行数
 set scrolloff=5
 " 0 で行頭, 9で行末
-nmap 0 ^
-nmap 9 $
+nnoremap 0 ^
+nnoremap 9 $
 " tab で対応ペアに移動
 nnoremap <Tab> %
 vnoremap <Tab> %
@@ -138,7 +139,7 @@ function! s:SID_PREFIX()
 endfunction
 function! s:tabline()  "{{{
   let s = ''
-  for i in range(1, tabpagenr('$'))
+  for l:i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
     let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
@@ -228,7 +229,7 @@ set ignorecase
 set smartcase
 " highlight
 set hlsearch
-hi Search ctermbg=22 guibg=22
+highlight Search ctermbg=22 guibg=22
 " Esc 2回でhighlightをclear
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " 検索単語を画面中央に表示
