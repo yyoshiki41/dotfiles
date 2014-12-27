@@ -27,7 +27,7 @@ set spell
 highlight clear SpellBad
 highlight SpellBad ctermbg=234 guibg=234
 " spell check から日本語を除外
-set spelllang+=cjk
+" set spelllang+=cjk
 fun! s:SpellConf()
   redir! => syntax
   silent syntax
