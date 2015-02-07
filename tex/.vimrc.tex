@@ -1,0 +1,9 @@
+" ---vim-latex---
+let tex_flavor='latex'
+set grepprg=grep\ -nH\ $*
+set shellslash
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_CompileRule_dvi='platex --interaction=nonstopmode $*'
+
+" Open PDF file
+let g:Tex_ViewRule_pdf='open -a Preview.app'

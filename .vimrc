@@ -253,3 +253,8 @@ endfunction
 " /{pattern}(?{pattern}) で/(?)をauto escape
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+
+" For vim-latex
+if filereadable(expand('~/dotfiles/.vimrc.tex'))
+  source ~/dotfiles/.vimrc.tex
+endif
