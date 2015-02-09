@@ -129,6 +129,15 @@ nnoremap <silent> [toggle]p :setl paste!<CR>:setl paste?<CR>
 nnoremap <silent> [toggle]i :setl autoindent!<CR>:setl autoindent?<CR>
 nnoremap <silent> [toggle]h :setl hlsearch!<CR>:setl hlsearch?<CR>
 
+" ---vimgrep---
+" open quickfix-window
+autocmd QuickFixCmdPost *grep* cwindow
+" move cursor in quickfix-window
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :<C-u>cfirst<CR>
+nnoremap ]Q :<C-u>clast<CR>
+
 " ---tabline---
 " t 2回でtabedit を開く
 nnoremap tt :<C-u>tabe<Space>
