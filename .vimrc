@@ -137,6 +137,8 @@ nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
+" search conflict file using vimgrep
+nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 
 " ---tabline---
 " t 2回でtabedit を開く
