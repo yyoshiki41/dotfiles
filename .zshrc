@@ -96,3 +96,9 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
+# For MacOS X encoding
+alias javac='javac -J-Dfile.encoding=UTF-8'
+alias java='java -Dfile.encoding=UTF-8'
+# For Hadoop / Hive
+export HADOOP_HOME=/usr/local/Cellar/hadoop/2.6.0
+export HIVE_HOME=/usr/local/Cellar/hive/1.0.0/libexec
