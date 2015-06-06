@@ -10,10 +10,10 @@
         st = status
         di = diff
         sh = show
-        ft = fetch
         ss = stash
         blL = blame -L
         lsf = ls-files
+        chpk = cherry-pick
 # log (lg)
         lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lga = log --graph --date=iso --name-status --pretty=format:'%C(red)%h %C(green)%an %C(blue)%ad %Creset%s %C(yellow)%d%Creset'
@@ -23,40 +23,56 @@
         bra = branch -a
         brr = branch -r
         brd = branch -d
+        brm = branch -m
 # checkout (ch)
         ch  = checkout
         chb = checkout -b
         chm = checkout master
         chd = checkout develop
+# add (a)
+        a  = add
+        aa = add .
+# commit (c)
+        c   = commit
+        ca  = commit -a
+        cm  = commit -m
+        cam = commit --amend
+# remove (rm)
+        rm  = remove
+# push (ps)
+        ps  = push
+        pso = push origin
+        psd = push develop
 # pull (pl)
         pl   = pull
         plo  = pull origin
         pld  = pull develop
         plod = pull origin develop
         plom = pull origin master
-# push (ps)
-        ps  = push
-        pso = push origin
-        psd = push develop
-# commit (c)
-        c  = commit
-        ca = commit -a
-        cm = commit -m
 # rebase (rb)
         rbm = rebase master
         rbd = rebase develop
         rbi = rebase -i
+        rbH = rebase -i HEAD^^
         rbc = rebase --continue
         rba = rebase --abort
-# cherry-pick (chpk)
-        chpk = cherry-pick
+# fetch (ft)
+        ft  = fetch
+        ftp = fetch --prune
 # revert (rv)
         rv  = revert
-        rvh = revert HEAD
+        rvH = revert HEAD
 # reset (rs)
         rs  = reset
+        rss = reset --soft
         rsh = reset --hard
+        rsH = reset --hard HEAD
 [filter "media"]
 	required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
+[user]
+	name = yyoshiki41
+	email = yyoshiki41@gmail.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
