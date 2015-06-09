@@ -22,8 +22,8 @@
         br  = branch
         bra = branch -a
         brr = branch -r
-        brd = branch -d
         brm = branch -m
+        brD = branch -D
 # checkout (ch)
         ch  = checkout
         chb = checkout -b
