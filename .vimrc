@@ -73,6 +73,11 @@ augroup cch
   autocmd WinLeave * set nocursorline
   autocmd WinEnter,BufRead * set cursorline
 augroup END
+" Change cursor shape in different modes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" cursor下の括弧に対応するものをhighlight
+set showmatch
 " Show status line
 set laststatus=2
 " Show command
@@ -80,8 +85,6 @@ set showcmd
 " command-line 補完
 set wildmenu
 set wildmode=longest:full,full
-" cursor下の括弧に対応するものをhighlight
-set showmatch
 " auto indent
 set smartindent
 set autoindent
