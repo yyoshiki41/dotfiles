@@ -45,6 +45,8 @@ alias v='/usr/bin/vim'
 alias gcc='gcc-4.9'
 alias -g L='| less'
 alias -g G='| grep'
+# $PATH format
+alias path='echo -e ${PATH//:/\\n}'
 
 # List direcory contents
 export LSCOLORS=exfxcxdxbxegedabagacad
