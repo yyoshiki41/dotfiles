@@ -45,13 +45,6 @@ alias v='/usr/bin/vim'
 alias gcc='gcc-4.9'
 alias -g L='| less'
 alias -g G='| grep'
-#alias forward-mysql=""
-#alias mysql-stage=""
-# apache
-alias apstart='sudo apachectl start'
-alias aprestart='sudo apachectl restart'
-alias apgraceful='sudo apachectl graceful'
-alias apstop='sudo apachectl stop'
 
 # List direcory contents
 export LSCOLORS=exfxcxdxbxegedabagacad
