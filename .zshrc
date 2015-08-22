@@ -104,3 +104,8 @@ export HADOOP_HOME=/usr/local/Cellar/hadoop/2.6.0
 export HIVE_HOME=/usr/local/Cellar/hive/1.0.0/libexec
 # For z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
+
+# For ssh login
+if [ -e ~/.ssh/host-colors ]; then
+    alias ssh=~/.ssh/host-colors
+fi
