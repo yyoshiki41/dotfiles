@@ -1,3 +1,6 @@
+" ---NeoBundle---
+execute "silent! source ~/.vimrc.bundle"
+
 scriptencoding utf-8
 syntax on
 filetype indent on
@@ -268,9 +271,6 @@ endfunction
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
-" ---NeoBundle---
-execute "silent! source ~/.vimrc.bundle"
-
 " ---vimdiff---
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
@@ -282,3 +282,6 @@ exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 au BufWritePre *.go Fmt
 au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
 au FileType go compiler go
+" need 'scrooloose/syntastic'
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'golint']
