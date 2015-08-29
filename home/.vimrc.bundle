@@ -1,0 +1,24 @@
+" for Neobundle {{{
+filetype plugin indent off
+
+let s:vim_home=expand('~/.vim')
+
+if has('vim_starting')
+  set nocompatible
+  let &runtimepath.=printf(',%s/bundle/neobundle.vim', s:vim_home)
+endif
+
+set nocompatible
+call neobundle#begin(expand(s:vim_home.'/bundle/'))
+  NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
+
+NeoBundleCheck
+
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'dgryski/vim-godef'
+NeoBundle 'vim-jp/vim-go-extra'
+" }}}

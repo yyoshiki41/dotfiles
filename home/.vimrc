@@ -268,6 +268,9 @@ endfunction
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
+" ---NeoBundle---
+execute "silent! source ~/.vimrc.bundle"
+
 " ---vimdiff---
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
