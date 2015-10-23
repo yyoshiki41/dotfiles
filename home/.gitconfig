@@ -39,6 +39,8 @@
         cam = commit --amend
 # remove (rm)
         rm  = remove
+# remote (rpo)
+        rpo = remote prune origin
 # push (ps)
         ps  = push
         pso = push origin
