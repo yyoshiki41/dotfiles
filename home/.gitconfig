@@ -8,7 +8,6 @@
 [alias]
         alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
         st = status
-        di = diff
         sh = show
         ss = stash
         blL = blame -L
@@ -32,6 +31,9 @@
 # add (a)
         a  = add
         aa = add .
+# diff (di)
+        di  = diff
+        diw = diff --word-diff
 # commit (c)
         c   = commit
         ca  = commit -a
