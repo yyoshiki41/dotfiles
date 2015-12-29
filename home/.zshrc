@@ -14,16 +14,49 @@ setopt correct
 bindkey -e
 # colors
 autoload -U colors && colors
-# prompt
-PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
 
-# For zsh-completions
+# Control system resources
+ulimit -u 512
+ulimit -n 4096
+
+### prompt ###
+PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
+# vcs_info
+autoload -Uz vcs_info
+# [current directory][git status]
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+# List direcory contents
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+
+### zsh-completions ###
 if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
-# 補完機能を有効にする
+# enable zsh completion
 autoload -Uz compinit
 compinit -u
+
+### zsh_history ###
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+# 直前と同じコマンドをhistoryに追加しない
+setopt hist_ignore_dups
+# 補完時にhistoryを自動的に展開する
+setopt hist_expand
+# historyを共有
+setopt share_history
 
 # direcory名で移動
 setopt auto_cd
@@ -40,67 +73,46 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
-# global alias
+### Alias ###
 alias v='/usr/bin/vim'
-alias gcc='gcc-4.9'
-alias -g L='| less'
-alias -g G='| grep'
-# $PATH format
-alias path='echo -e ${PATH//:/\\n}'
-
-# List direcory contents
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-# alias
-alias ls='ls -GF'
-alias ll='ls -lh'
-alias la='ls -lAh'
-alias gls='gls --color'
-
+alias be='bundle exec'
 # grep
+alias -g G='| grep'
 alias gr='grep'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
+# ls
+alias ls='ls -GF'
+alias ll='ls -lh'
+alias la='ls -lAh'
+# format $PATH
+alias path='echo -e ${PATH//:/\\n}'
 
-# historyの設定
-HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
-# 直前と同じコマンドをhistoryに追加しない
-setopt hist_ignore_dups
-# 補完時にhistoryを自動的に展開する
-setopt hist_expand
-# historyを共有
-setopt share_history
+### For golang ###
+source "$HOME/.lan/go.util"
+### For ruby ###
+source "$HOME/.lan/ruby.util"
 
-# vcs_info
-autoload -Uz vcs_info
-# [current directory][git status]
-RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
-
-# For python
-if which pyenv > /dev/null; then
-    eval "$(pyenv init -)";
+### nvm ###
+if [ -e "$(brew --prefix nvm)/nvm.sh" ]; then
+  source $(brew --prefix nvm)/nvm.sh
+  nvm alias stable v0.10.33
+  nvm use stable
 fi
-# For MacOS X encoding
-alias javac='javac -J-Dfile.encoding=UTF-8'
-alias java='java -Dfile.encoding=UTF-8'
-# For Hadoop / Hive
-export HADOOP_HOME=/usr/local/Cellar/hadoop/2.6.0
-export HIVE_HOME=/usr/local/Cellar/hive/1.0.0/libexec
-# For z
+
+### Useful Commands ###
+# z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
-
-# For ssh login
-if [ -e ~/.ssh/host-colors ]; then
-    alias ssh=~/.ssh/host-colors
-fi
+# Use peco + ghq
+function peco-src () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
+# git extension for github
+export PATH=~/.git-hub:$PATH

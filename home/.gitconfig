@@ -81,3 +81,5 @@
 	email = yyoshiki41@gmail.com
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[ghq]
+        root = ~/repos/src
