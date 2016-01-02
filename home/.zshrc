@@ -20,7 +20,18 @@ ulimit -u 512
 ulimit -n 4096
 
 ### prompt ###
-PROMPT='[%F{green}%B%n%b%f@%F{yellow}%U%m%u%f]# '
+ps_exit="\\(^o^)/"
+function precmd_01() {
+    if [ $? -ne 0 ]; then
+        ps_exit="/(T_T)\\"
+    else
+        ps_exit="\\(^o^)/"
+    fi
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd precmd_01
+PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]# '
 # vcs_info
 autoload -Uz vcs_info
 # [current directory][git status]
@@ -104,7 +115,7 @@ fi
 # z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
 # Use peco + ghq
-function peco-src () {
+function peco-src() {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
