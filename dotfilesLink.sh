@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # zsh
-ln -sf ~/dotfiles/home/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/home/.zshenv ~/.zshenv
+ln -sf ~/dotfiles/home/.zprofile ~/.zprofile
+ln -sf ~/dotfiles/home/.zshrc ~/.zshrc
 # Programming language
 ln -sf ~/dotfiles/home/lan ~/.lan
 

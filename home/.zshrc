@@ -99,18 +99,6 @@ alias la='ls -lAh'
 # format $PATH
 alias path='echo -e ${PATH//:/\\n}'
 
-### For golang ###
-source "$HOME/.lan/go.util"
-### For ruby ###
-source "$HOME/.lan/ruby.util"
-
-### nvm ###
-if [ -e "$(brew --prefix nvm)/nvm.sh" ]; then
-  source $(brew --prefix nvm)/nvm.sh
-  nvm alias stable v0.10.33
-  nvm use stable
-fi
-
 ### Useful Commands ###
 # z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
@@ -125,5 +113,3 @@ function peco-src() {
 }
 zle -N peco-src
 bindkey '^]' peco-src
-# git extension for github
-export PATH=~/.git-hub:$PATH
