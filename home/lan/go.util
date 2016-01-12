@@ -1,9 +1,9 @@
-### GOPATH ###
-export GOPATH="$HOME/repos"
-export PATH="$GOPATH/bin:$PATH"
-
 # go version manager
 if [ -s "$HOME/.gvm/scripts/gvm" ]; then
   source "$HOME/.gvm/scripts/gvm"
-  gvm use go1.4.2 --default
+  gvm use go1.5.2
 fi
+
+### GOPATH ###
+export GOPATH="$HOME/repos"
+export PATH="$GOPATH/bin:$PATH"
