@@ -102,7 +102,17 @@ alias path='echo -e ${PATH//:/\\n}'
 ### Useful Commands ###
 # z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
-# Use peco + ghq
+# z + peco
+function peco-z() {
+  local res=$(z | sort -rn | cut -c 12- | peco)
+  if [ -n "$res" ]; then
+    BUFFER+="cd $res"
+    zle accept-line
+  fi
+}
+zle -N peco-z
+bindkey '^[' peco-z
+# ghq + peco
 function peco-src() {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
