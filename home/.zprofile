@@ -4,11 +4,9 @@ source "$HOME/.lan/go.util"
 source "$HOME/.lan/ruby.util"
 
 ### nvm ###
-if [ -e "$(brew --prefix nvm)/nvm.sh" ]; then
-  source $(brew --prefix nvm)/nvm.sh
-  nvm alias stable v0.10.33
-  nvm use stable
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+nvm use --delete-prefix v4.2.4
 
 # git extension for github
 export PATH="$HOME/.git-hub:$PATH"
