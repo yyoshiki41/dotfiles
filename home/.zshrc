@@ -106,9 +106,10 @@ alias path='echo -e ${PATH//:/\\n}'
 function peco-z() {
   local res=$(z | sort -rn | cut -c 12- | peco)
   if [ -n "$res" ]; then
-    BUFFER+="cd $res"
+    BUFFER="cd $res"
     zle accept-line
   fi
+  zle clear-screen
 }
 zle -N peco-z
 bindkey '^[' peco-z
@@ -116,10 +117,21 @@ bindkey '^[' peco-z
 function peco-src() {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
+        BUFFER="cd $selected_dir"
         zle accept-line
     fi
     zle clear-screen
 }
 zle -N peco-src
 bindkey '^]' peco-src
+# hub + peco
+function peco-hub-pr() {
+    local pr=$(hub issue 2> /dev/null | grep 'pull' | peco --query "$LBUFFER" | sed -e 's/.*( \(.*\) )$/\1/')
+    if [ -n "$pr" ]; then
+        BUFFER="open $pr"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-hub-pr
+bindkey '^\' peco-hub-pr
