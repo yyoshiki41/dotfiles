@@ -62,12 +62,12 @@ compinit -u
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-# 直前と同じコマンドをhistoryに追加しない
-setopt hist_ignore_dups
-# 補完時にhistoryを自動的に展開する
-setopt hist_expand
 # historyを共有
 setopt share_history
+# 補完時にhistoryを自動的に展開する
+setopt hist_expand
+# 同じコマンドの場合、古い方を削除
+setopt hist_ignore_all_dups
 
 # direcory名で移動
 setopt auto_cd
@@ -102,36 +102,53 @@ alias path='echo -e ${PATH//:/\\n}'
 ### Useful Commands ###
 # z
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
-# z + peco
+# peco + z
 function peco-z() {
-  local res=$(z | sort -rn | cut -c 12- | peco)
-  if [ -n "$res" ]; then
-    BUFFER="cd $res"
-    zle accept-line
-  fi
-  zle clear-screen
+    local res=$(z | sort -rn | cut -c 12- | peco)
+    if [ -n "$res" ]; then
+        BUFFER="cd $res"
+        zle accept-line
+    fi
+    zle redisplay
 }
 zle -N peco-z
 bindkey '^[' peco-z
-# ghq + peco
-function peco-src() {
+# peco + ghq
+function peco-ghq() {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd $selected_dir"
         zle accept-line
     fi
-    zle clear-screen
+    zle redisplay
 }
-zle -N peco-src
-bindkey '^]' peco-src
-# hub + peco
+zle -N peco-ghq
+bindkey '^]' peco-ghq
+# peco + hub
 function peco-hub-pr() {
     local pr=$(hub issue 2> /dev/null | grep 'pull' | peco --query "$LBUFFER" | sed -e 's/.*( \(.*\) )$/\1/')
     if [ -n "$pr" ]; then
         BUFFER="open $pr"
         zle accept-line
     fi
-    zle clear-screen
+    zle redisplay
 }
 zle -N peco-hub-pr
 bindkey '^\' peco-hub-pr
+# peco + history
+function peco-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-history
+bindkey '^r' peco-history
+
+# for direnv
+eval "$(direnv hook zsh)"
