@@ -7,6 +7,7 @@
 
 [alias]
         alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+        refresh = !git fetch origin && git remote prune origin
         st = status
         sh = show
         ss = stash
@@ -16,6 +17,7 @@
 # log (lg)
         lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         lga = log --graph --date=iso --name-status --pretty=format:'%C(red)%h %C(green)%an %C(blue)%ad %Creset%s %C(yellow)%d%Creset'
+        ld  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
         story = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
 # branch (br)
         br  = branch
@@ -32,7 +34,10 @@
         a  = add
         aa = add .
 # diff (di)
-        di  = diff
+        di = diff
+        d1 = diff HEAD~
+        d2 = diff HEAD~2
+        d3 = diff HEAD~3
         diw = diff --word-diff
 # commit (c)
         c   = commit
@@ -51,6 +56,7 @@
         pl   = pull
         plo  = pull origin
         pld  = pull develop
+        plr  = pull --rebase
         plod = pull origin develop
         plom = pull origin master
 # rebase (rb)
