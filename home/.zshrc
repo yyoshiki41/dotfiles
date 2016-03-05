@@ -101,7 +101,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 ### Useful Commands ###
 # z
-. `brew --prefix`/Cellar/z/1.9/etc/profile.d/z.sh
+. `brew --prefix z`/etc/profile.d/z.sh
 # peco + z
 function peco-z() {
     local res=$(z | sort -rn | cut -c 12- | peco)
