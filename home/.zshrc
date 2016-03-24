@@ -99,6 +99,19 @@ alias la='ls -lAh'
 # format $PATH
 alias path='echo -e ${PATH//:/\\n}'
 
+# expand childa to $HOME {{{
+function expand-to-home() {
+  if [ "$LBUFFER" = "" -o "$LBUFFER[-1]" = " " ]; then
+    LBUFFER+="~/"
+  else
+    zle self-insert
+  fi
+}
+zle -N expand-to-home
+bindkey "\\" expand-to-home-or-complete
+# }}}
+
+
 ### Useful Commands ###
 # z
 . `brew --prefix z`/etc/profile.d/z.sh
