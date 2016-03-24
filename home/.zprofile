@@ -6,7 +6,7 @@ source "$HOME/.lan/ruby.util"
 ### nvm ###
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use --delete-prefix v4.2.4
+nvm use --delete-prefix v4.2.6
 
 # git extension for github
 export PATH="$HOME/.git-hub:$PATH"
