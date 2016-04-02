@@ -58,6 +58,11 @@ fi
 autoload -Uz compinit
 compinit -u
 
+# awscli completion
+if [ -s "/usr/local/share/zsh/site-functions/_aws" ]; then
+    source /usr/local/share/zsh/site-functions/_aws
+fi
+
 ### zsh_history ###
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -108,7 +113,7 @@ function expand-to-home() {
   fi
 }
 zle -N expand-to-home
-bindkey "\\" expand-to-home-or-complete
+bindkey "\\" expand-to-home
 # }}}
 
 
