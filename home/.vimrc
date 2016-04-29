@@ -28,7 +28,7 @@ inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 " spell check
 set spell
 highlight clear SpellBad
-highlight SpellBad ctermbg=234 guibg=234
+highlight SpellBad ctermbg=234 guibg=#1c1c1c
 " spell check から日本語を除外
 " set spelllang+=cjk
 fun! s:SpellConf()
@@ -246,7 +246,7 @@ set ignorecase
 set smartcase
 " highlight
 set hlsearch
-highlight Search ctermbg=22 guibg=22
+highlight Search ctermbg=22 guibg=#005f00
 " Esc 2回でhighlightをclear
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " 検索単語を画面中央に表示
