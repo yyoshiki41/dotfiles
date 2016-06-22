@@ -95,6 +95,7 @@ alias be='bundle exec'
 # grep
 alias -g G='| grep'
 alias gr='grep'
+alias ggr='git grep'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
 # ls
