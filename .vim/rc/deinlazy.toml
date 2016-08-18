@@ -9,3 +9,7 @@ depends = 'neomru.vim'
 [[plugins]]
 repo = 'Shougo/unite-outline'
 on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'

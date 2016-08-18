@@ -2,6 +2,7 @@ if &compatible
   set nocompatible
 endif
 
+let mapleader = "\<Space>"
 scriptencoding utf-8
 syntax on
 
@@ -307,10 +308,40 @@ highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
 " --- Go ---
-au BufWritePre *.go Fmt
+au BufWritePre *.go GoFmt
 au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
-" :make
 au FileType go compiler go
 " for 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['go'] }
-let g:syntastic_go_checkers = ['go', 'golint']
+let g:syntastic_go_checkers = ['golint']
+
+" --- vim-go ---
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+let g:go_auto_sameids = 0
+let g:go_auto_type_info = 1
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_build_constraints = 1
+
+augroup go
+  autocmd!
+
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
+
+  autocmd FileType go nmap <Leader>i <Plug>(go-implements)
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+
+  autocmd FileType go nmap <Leader>r <Plug>(go-run)
+  autocmd FileType go nmap <Leader>b <Plug>(go-build)
+  autocmd FileType go nmap <Leader>test <Plug>(go-test)
+
+  autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
+augroup END
