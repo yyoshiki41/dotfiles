@@ -2,9 +2,6 @@
 	path = ~/.gitconfig_local
 [core]
 	excludesfile = ~/.gitignore_global
-[user]
-	name = yyoshiki41
-	email = yyoshiki41@gmail.com
 [color]
 	ui = true
 [url "git@github.com:"]
