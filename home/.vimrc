@@ -17,8 +17,10 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 " 内容が変更されたら自動的に再読み込み
 set autoread
 " beep音
-set visualbell t_vb=
+set t_vb=
+set novisualbell
 set noerrorbells
+set belloff=all
 " swapfileを作らない
 set noswapfile
 " backspace で消せるようにする
@@ -54,20 +56,31 @@ augroup spell_check
   autocmd!
   autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
 augroup END
-" for markdown
+" --- markdown ---
 set syntax=markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
+let g:markdown_fenced_languages = [
+      \  'css',
+      \  'javascript',
+      \  'js=javascript',
+      \  'json=javascript',
+      \  'ruby',
+      \  'sass',
+      \  'xml',
+      \  'vim',
+      \]
 
 " ---display---
 " colors
 set t_Co=256
-" 行番号表示
-set number
-" mode 表示
+" Enable modeline
+set modeline
 set showmode
-" 編集中のfile名を表示
+" Show line number
+set number
+" Show file name
 set title
-" ruler を表示
+" Show ruler
 set ruler
 " Show cursor line
 set cursorline
@@ -100,6 +113,8 @@ set autoindent
 set formatoptions-=c
 " tab 設定
 set noexpandtab
+set smarttab
+set shiftround
 " tab は半角4文字分のスペース
 set ts=4 sw=4 sts=0
 " tab, EOFなどを可視化
@@ -128,6 +143,9 @@ nnoremap 9 $
 " tab で対応ペアに移動
 nnoremap <Tab> %
 vnoremap <Tab> %
+" Highlight when CursorMoved
+set cpoptions-=m
+set matchtime=1
 " Add square bracket
 set matchpairs+=<:>
 " v 2回で行末まで選択
@@ -186,6 +204,11 @@ for n in range(1, 9)
 endfor
 " move tab  ※(引数+1)番目にtabを移動
 nnoremap tm :<C-u>tabm<Space>
+" --- window ---
+" Put the new window below the current one
+set splitbelow
+" Put the new window right the current one
+set splitright
 
 " ---insert mode---
 " brackets, quotation mark を自動補完
