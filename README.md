@@ -25,13 +25,14 @@ $ sh ~/dotfiles/dotfilesLink.sh
 ```
 
 
-### Appendix
+## Appendix
 
-#### ■ For vim-latex
-*Load .vim.tex*
-```
+### ■ For vim-latex
+*Load .vimrc.tex*
+
+```bash
 " For vim-latex
 if filereadable(expand('~/dotfiles/home/tex/.vimrc.tex'))
-  source ~/dotfiles/home/.vimrc.tex
+  source ~/dotfiles/home/tex/.vimrc.tex
 endif
 ```
