@@ -2,10 +2,20 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
 repo = 'scrooloose/syntastic'
 
 [[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml', 'tml']
+
+[[plugins]]
 repo = 'dgryski/vim-godef'
+on_ft = 'go'
 
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
+on_ft = 'go'
