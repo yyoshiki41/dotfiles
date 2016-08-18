@@ -1,8 +1,13 @@
-" ---NeoBundle---
-execute "silent! source ~/.vimrc.bundle"
+if &compatible
+  set nocompatible
+endif
 
 scriptencoding utf-8
 syntax on
+
+" --- dein.vim ---
+execute "source ~/.vimrc.dein"
+
 filetype indent on
 filetype plugin on
 " terminal接続を高速にする

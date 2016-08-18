@@ -1,0 +1,11 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'dgryski/vim-godef'
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
