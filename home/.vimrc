@@ -25,8 +25,9 @@ set belloff=all
 set noswapfile
 " backspace で消せるようにする
 set backspace=start,eol,indent
-" OS のclipboard を使えるようにする
-" set clipboard=unnamed
+" copy-to-clipboard-without-pbcopy
+"set clipboard^=unnamed
+"set clipboard^=unnamedplus
 " insert mode をぬけるとIMEオフ
 set noimdisable
 set iminsert=0 imsearch=0
@@ -299,14 +300,13 @@ endfunction
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
-" ---vimdiff---
+" --- vimdiff ---
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
-" ---go---
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+" --- Go ---
 au BufWritePre *.go Fmt
 au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
 au FileType go compiler go
