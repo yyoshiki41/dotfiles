@@ -309,7 +309,8 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 " --- Go ---
 au BufWritePre *.go Fmt
 au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
+" :make
 au FileType go compiler go
-" need 'scrooloose/syntastic'
+" for 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
