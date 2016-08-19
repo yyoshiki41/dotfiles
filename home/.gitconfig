@@ -2,6 +2,7 @@
 	path = ~/.gitconfig_local
 [core]
 	excludesfile = ~/.gitignore_global
+	editor = /usr/local/bin/vim
 [color]
 	ui = true
 [url "git@github.com:"]
