@@ -21,7 +21,7 @@ set autoread
 set t_vb=
 set novisualbell
 set noerrorbells
-"set belloff=all
+set belloff=all
 " swapfileを作らない
 set noswapfile
 " backspace で消せるようにする
