@@ -91,6 +91,7 @@ zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
 ### Alias ###
 alias v='/usr/local/bin/vim'
+alias vi='/usr/local/bin/vim'
 alias be='bundle exec'
 # grep
 alias -g G='| grep'
