@@ -90,7 +90,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
 ### Alias ###
-alias v='/usr/bin/vim'
+alias v='/usr/local/bin/vim'
 alias be='bundle exec'
 # grep
 alias -g G='| grep'
