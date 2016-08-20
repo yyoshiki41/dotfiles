@@ -160,6 +160,11 @@ nnoremap <silent> [toggle]p :setl paste!<CR>:setl paste?<CR>
 nnoremap <silent> [toggle]i :setl autoindent!<CR>:setl autoindent?<CR>
 nnoremap <silent> [toggle]h :setl hlsearch!<CR>:setl hlsearch?<CR>
 
+" Use <Leader>
+nnoremap <Leader>p :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+
 " ---vimgrep---
 " open quickfix-window
 autocmd QuickFixCmdPost *grep* cwindow
