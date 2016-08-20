@@ -159,13 +159,12 @@ nnoremap <silent> [toggle]s :setl spell!<CR>:setl spell?<CR>
 nnoremap <silent> [toggle]p :setl paste!<CR>:setl paste?<CR>
 nnoremap <silent> [toggle]i :setl autoindent!<CR>:setl autoindent?<CR>
 nnoremap <silent> [toggle]h :setl hlsearch!<CR>:setl hlsearch?<CR>
-
 " Use <Leader>
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
-" ---vimgrep---
+" --- vimgrep ---
 " open quickfix-window
 autocmd QuickFixCmdPost *grep* cwindow
 " move cursor in quickfix-window
@@ -176,7 +175,7 @@ nnoremap ]Q :<C-u>clast<CR>
 " search conflict file using vimgrep
 nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 
-" ---tabline---
+" --- tabline ---
 " t 2回でtabedit を開く
 nnoremap tt :<C-u>tabe<Space>
 " show tabline
@@ -271,6 +270,16 @@ vnoremap " "zdi"<C-R>z"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 " yank後にcursor位置を末尾に
 vnoremap y y`>
+" Replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vnoremap <silent> <expr> p <sid>Repl()
 
 " ---search---
 " incremental search
