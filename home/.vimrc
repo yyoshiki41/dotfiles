@@ -62,14 +62,15 @@ augroup END
 set syntax=markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 let g:markdown_fenced_languages = [
-      \  'css',
+      \  'bash=sh',
+      \  'xml',
+      \  'vim',
+      \  'ruby',
       \  'javascript',
       \  'js=javascript',
       \  'json=javascript',
-      \  'ruby',
       \  'sass',
-      \  'xml',
-      \  'vim',
+      \  'css',
       \]
 
 " ---display---
