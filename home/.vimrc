@@ -355,7 +355,6 @@ let g:go_highlight_operators = 0
 augroup MyGolang
   autocmd!
 
-  autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=214
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
