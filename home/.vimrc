@@ -356,6 +356,7 @@ augroup MyGolang
   autocmd!
 
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=214
+  autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
