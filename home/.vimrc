@@ -352,8 +352,11 @@ let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
 let g:go_highlight_operators = 0
 
-augroup go
+augroup MyGolang
   autocmd!
+
+  autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=214
+  autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
