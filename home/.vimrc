@@ -359,6 +359,7 @@ augroup MyGolang
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
 
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
