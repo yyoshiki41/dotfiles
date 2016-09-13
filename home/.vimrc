@@ -22,11 +22,12 @@ set t_vb=
 set novisualbell
 set noerrorbells
 set belloff=all
-" swapfileを作らない
+" Do not create backup and swapfile
+set nobackup
 set noswapfile
 " backspace で消せるようにする
 set backspace=start,eol,indent
-" copy-to-clipboard-without-pbcopy
+" Copy to clipboard without pbcopy
 "set clipboard^=unnamed
 "set clipboard^=unnamedplus
 " insert mode をぬけるとIMEオフ
@@ -106,9 +107,11 @@ set showmatch
 set laststatus=2
 " Show command
 set showcmd
-" command-line 補完
+" Turn on the WiLd menu
 set wildmenu
 set wildmode=longest:full,full
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 " auto indent
 set smartindent
 set autoindent
@@ -218,7 +221,7 @@ set splitbelow
 set splitright
 
 " ---insert mode---
-" brackets, quotation mark を自動補完
+" Map auto complete of {, [, (, ", '
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
