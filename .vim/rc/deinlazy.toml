@@ -14,5 +14,8 @@ on_source = 'unite.vim'
 repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
+repo = 'mileszs/ack.vim'
+
+[[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
