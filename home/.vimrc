@@ -15,6 +15,8 @@ filetype plugin on
 set ttyfast
 " 前回終了時のcursor 位置で起動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+" Create the directory which a new file will reside in
+autocmd BufNewFile * :exe ': !mkdir -p ' . escape(fnamemodify(bufname('%'),':p:h'),'#% \\')
 " 内容が変更されたら自動的に再読み込み
 set autoread
 " beep音
