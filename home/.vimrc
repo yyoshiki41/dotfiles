@@ -352,6 +352,8 @@ let g:go_highlight_methods = 1
 let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 0
+" Highlights predefined identifier such as `nil`, `iota`
+hi link goPredefinedIdentifiers Identifier
 " Don't enable these options because vim becomes slow.
 let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
