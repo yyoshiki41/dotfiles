@@ -1,27 +1,5 @@
 <?xml version="1.0"?>
 <root>
-    <appdef>
-        <appname>SLACK</appname>
-        <equal>com.tinyspeck.slackmacgap</equal>
-    </appdef>
-    <item>
-        <name>For Slack Control+TAB=move unread channel</name>
-        <identifier>private.app_slack_move_channel_with_ctrln_ctrlp</identifier>
-        <only>SLACK</only>
-        <autogen>__KeyToKey__ KeyCode::TAB, ModifierFlag::CONTROL_L, KeyCode::CURSOR_DOWN, ModifierFlag::OPTION_L, ModifierFlag::SHIFT_L</autogen>
-    </item>
-
-    <appdef>
-      <appname>iTERM2</appname>
-      <equal>com.googlecode.iterm2</equal>
-    </appdef>
-    <list>
-      <item>
-        <name>Leave Insert Mode with EISUU (vim keybind apps)</name>
-        <identifier>private.vim_keybind_apps_esc_with_eisuu</identifier>
-        <only>iTERM2,TERMINAL</only>
-        <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::ESCAPE, KeyCode::JIS_EISUU</autogen>
-        <autogen>--KeyToKey-- KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
-      </item>
-    </list>
+  <include path="{{ ENV_HOME }}/dotfiles/misc/karabiner/slack.xml" />
+  <include path="{{ ENV_HOME }}/dotfiles/misc/karabiner/iterm.xml" />
 </root>

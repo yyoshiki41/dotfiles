@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root>
+  <appdef>
+    <appname>SLACK</appname>
+    <equal>com.tinyspeck.slackmacgap</equal>
+  </appdef>
+  <list>
+    <item>
+      <name>For Slack Control+TAB (or with shift) = move unread channel</name>
+      <identifier>private.app_slack_move_unread_channel_with_ctrl_tab</identifier>
+      <only>SLACK</only>
+      <autogen>__KeyToKey__ KeyCode::TAB, ModifierFlag::CONTROL_L, ModifierFlag::NONE, KeyCode::CURSOR_DOWN, ModifierFlag::OPTION_L, ModifierFlag::SHIFT_L</autogen>
+      <autogen>__KeyToKey__ KeyCode::TAB, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_R, KeyCode::CURSOR_UP, ModifierFlag::OPTION_L, ModifierFlag::SHIFT_L</autogen>
+    </item>
+    <item>
+      <name>For Slack Control+n/p = move channel</name>
+      <identifier>private.app_slack_move_channel_with_ctrl_n_p</identifier>
+      <only>SLACK</only>
+      <autogen>__KeyToKey__ KeyCode::N, ModifierFlag::CONTROL_L, KeyCode::CURSOR_DOWN, ModifierFlag::OPTION_L</autogen>
+      <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::CONTROL_L, KeyCode::CURSOR_UP, ModifierFlag::OPTION_L</autogen>
+    </item>
+  </list>
+</root>
