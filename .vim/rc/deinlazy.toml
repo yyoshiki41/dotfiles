@@ -1,6 +1,5 @@
 [[plugins]]
 repo = 'Shougo/neomru.vim'
-on_if = 1
 
 [[plugins]]
 repo = 'Shougo/unite.vim'

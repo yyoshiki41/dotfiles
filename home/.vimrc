@@ -61,20 +61,6 @@ augroup spell_check
   autocmd!
   autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
 augroup END
-" --- markdown ---
-set syntax=markdown
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-let g:markdown_fenced_languages = [
-      \  'bash=sh',
-      \  'xml',
-      \  'vim',
-      \  'ruby',
-      \  'javascript',
-      \  'js=javascript',
-      \  'json=javascript',
-      \  'sass',
-      \  'css',
-      \]
 
 " ---display---
 " colors
@@ -326,6 +312,27 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+
+" --- markdown ---
+set syntax=markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+let g:markdown_fenced_languages = [
+      \  'bash=sh',
+      \  'xml',
+      \  'vim',
+      \  'ruby',
+      \  'javascript',
+      \  'js=javascript',
+      \  'json=javascript',
+      \  'sass',
+      \  'css',
+      \]
+
+" --- shell ---
+augroup MyShell
+  autocmd!
+  autocmd BufNewFile *.sh put='#!/bin/bash' | exe ':g/^$/d'
+augroup END
 
 " --- Go ---
 au BufWritePre *.go GoFmt
