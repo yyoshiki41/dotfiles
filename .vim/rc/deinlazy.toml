@@ -18,3 +18,7 @@ repo = 'mileszs/ack.vim'
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = 'ts'
