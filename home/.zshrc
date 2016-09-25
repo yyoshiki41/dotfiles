@@ -15,10 +15,6 @@ bindkey -e
 # colors
 autoload -U colors && colors
 
-# Control system resources
-ulimit -u 512
-ulimit -n 4096
-
 ### prompt ###
 ps_exit="\\(^o^)/"
 function precmd_01() {
