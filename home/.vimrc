@@ -1,7 +1,3 @@
-if &compatible
-  set nocompatible
-endif
-
 let mapleader = "\<Space>"
 scriptencoding utf-8
 syntax on
