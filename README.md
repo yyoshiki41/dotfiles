@@ -18,10 +18,11 @@ dotfiles
 $ git clone git@github.com:yyoshiki41/dotfiles.git
 ```
 
-### 3. Run the .sh File
+### 3. Run the `make` command
 
 ```bash
-$ sh ~/dotfiles/dotfilesLink.sh
+$ cd dotfiles
+$ make init
 ```
 
 
