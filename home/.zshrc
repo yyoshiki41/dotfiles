@@ -167,4 +167,6 @@ zle -N peco-history
 bindkey '^r' peco-history
 
 # for direnv
-eval "$(direnv hook zsh)"
+if which direnv > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
