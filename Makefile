@@ -1,15 +1,17 @@
+.PHONY: all help init
+
 all: help
 
 help:
-	@echo "make init                #=> Update symlink & submodule"
-	@echo "make update-symlink      #=> Update symlink"
-	@echo "make update-submodule    #=> Update submodule"
+	@echo "make init          #=> Run init scripts"
+	@echo "make submodule     #=> Update submodule"
+	@echo "make update        #=> Update symlink & submodule"
 
-init: update-submodule update-symlink
-
-update-symlink:
-	@./etc/init/init.sh
-
-update-submodule:
+init:
+	./etc/init/init.sh
 	git submodule init
+
+submodule:
 	git submodule update
+
+update: init submodule
