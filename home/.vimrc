@@ -381,3 +381,7 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
 augroup END
+
+" --- ctrlp ---
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
