@@ -22,3 +22,7 @@ on_ft = 'go'
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = 'ts'
+
+[[plugins]]
+repo = 'fatih/vim-hclfmt'
+on_ft = ['hcl', 'tf']
