@@ -89,6 +89,7 @@ zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 alias v='/usr/local/bin/vim'
 alias vi='/usr/local/bin/vim'
 alias be='bundle exec'
+alias br='brew'
 # grep
 alias -g G='| grep'
 alias gr='grep'
@@ -99,7 +100,7 @@ export GREP_COLOR='00;36'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
-# format $PATH
+# echo formatted $PATH
 alias path='echo -e ${PATH//:/\\n}'
 
 # expand childa to $HOME {{{
