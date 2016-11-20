@@ -6,6 +6,8 @@ ln -sf ~/dotfiles/home/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/home/.zshrc ~/.zshrc
 # Programming language
 ln -nsf ~/dotfiles/home/lan ~/.lan
+# Create a new folder for completions
+mkdir -p ~/.zsh/completions
 
 # vim
 ln -nsf ~/dotfiles/.vim/dein.vim ~/.vim/dein.vim
