@@ -1,8 +1,10 @@
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
-# git extension for github
-export PATH="$HOME/.git-hub:$PATH"
+# For PostgreSQL
+export PGDATA=/usr/local/var/postgres
 
+# git extension for github
+#export PATH="$HOME/.git-hub:$PATH"
 # Added by the Heroku Toolbelt
 #export PATH="/usr/local/heroku/bin:$PATH"
 # Go App Engine SDK
