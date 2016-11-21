@@ -118,43 +118,13 @@ zle -N expand-to-home
 bindkey "\\" expand-to-home
 # }}}
 
+# for direnv
+if which direnv > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
 
 ### Useful Commands ###
-# z
-. `brew --prefix z`/etc/profile.d/z.sh
-# peco + z
-function peco-z() {
-    local res=$(z | sort -rn | cut -c 12- | peco)
-    if [ -n "$res" ]; then
-        BUFFER="cd $res"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-z
-bindkey '^[' peco-z
-# peco + ghq
-function peco-ghq() {
-    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd $selected_dir"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-ghq
-bindkey '^]' peco-ghq
-# peco + hub
-function peco-hub-pr() {
-    local pr=$(hub issue 2> /dev/null | grep 'pull' | peco --query "$LBUFFER" | sed -e 's/.*( \(.*\) )$/\1/')
-    if [ -n "$pr" ]; then
-        BUFFER="open $pr"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-hub-pr
-bindkey '^\' peco-hub-pr
 # peco + history
 function peco-history() {
     local tac
@@ -170,7 +140,52 @@ function peco-history() {
 zle -N peco-history
 bindkey '^r' peco-history
 
-# for direnv
-if which direnv > /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
+# z
+. `brew --prefix z`/etc/profile.d/z.sh
+# peco + z
+function peco-z() {
+    local res=$(z | sort -rn | cut -c 12- | peco)
+    if [ -n "$res" ]; then
+        BUFFER="cd $res"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-z
+bindkey '^\' peco-z
+
+# peco + ghq
+function peco-ghq() {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd $selected_dir"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-ghq
+bindkey '^[' peco-ghq
+
+# peco + hub browse
+function peco-hub-browse() {
+    local res=$(ghq list | grep "github.com" | cut -d "/" -f 2,3 | peco)
+    if [ -n "$res" ]; then
+        BUFFER="hub browse $res"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-hub-browse
+bindkey '^]' peco-hub-browse
+
+# peco + hub issue
+function peco-hub-pr() {
+    local pr=$(hub issue 2> /dev/null | grep 'pull' | peco --query "$LBUFFER" | sed -e 's/.*( \(.*\) )$/\1/')
+    if [ -n "$pr" ]; then
+        BUFFER="open $pr"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-hub-pr
+bindkey '^/' peco-hub-pr
