@@ -93,6 +93,7 @@ alias v='/usr/local/bin/vim'
 alias vi='/usr/local/bin/vim'
 alias be='bundle exec'
 alias br='brew'
+alias hb='hub browse'
 # grep
 alias -g G='| grep'
 alias gr='grep'
