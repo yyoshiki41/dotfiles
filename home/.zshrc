@@ -94,6 +94,7 @@ alias vi='/usr/local/bin/vim'
 alias be='bundle exec'
 alias br='brew'
 alias hb='hub browse'
+alias hc='hub compare'
 # grep
 alias -g G='| grep'
 alias gr='grep'
