@@ -64,8 +64,8 @@ fi
 
 ### zsh_history ###
 HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
+HISTSIZE=1048576
+SAVEHIST=1048576
 # historyを共有
 setopt share_history
 # 補完時にhistoryを自動的に展開する
