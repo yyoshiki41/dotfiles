@@ -1,4 +1,4 @@
-# とりあえずいるもの
+# language
 export LANG=ja_JP.UTF-8
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
@@ -96,6 +96,7 @@ alias op='open'
 alias hb='hub browse'
 alias hc='hub compare'
 alias be='bundle exec'
+alias gg='go get'
 # grep
 alias -g G='| grep'
 alias gr='grep'

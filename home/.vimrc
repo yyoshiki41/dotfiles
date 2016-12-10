@@ -142,13 +142,12 @@ set matchpairs+=<:>
 vnoremap v $h
 " T + ? で各種設定のtoggle
 nnoremap [toggle] <Nop>
-nmap T [toggle]
+nnoremap T [toggle]
 nnoremap <silent> [toggle]s :setl spell!<CR>:setl spell?<CR>
 nnoremap <silent> [toggle]p :setl paste!<CR>:setl paste?<CR>
 nnoremap <silent> [toggle]i :setl autoindent!<CR>:setl autoindent?<CR>
 nnoremap <silent> [toggle]h :setl hlsearch!<CR>:setl hlsearch?<CR>
 " Use <Leader>
-nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
@@ -164,7 +163,7 @@ nnoremap ]Q :<C-u>clast<CR>
 nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 
 " --- tabline ---
-" t 2回でtabedit を開く
+" open tabe edit
 nnoremap tt :<C-u>tabe<Space>
 " show tabline
 set showtabline=2
@@ -367,9 +366,9 @@ augroup MyGolang
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
+  autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
-  autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
 
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
@@ -382,6 +381,27 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
 augroup END
 
-" --- ctrlp ---
-" Ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" --- unite.vim ---
+nnoremap <silent> <Leader>u :<C-u>Unite<CR>
+let g:unite_enable_smart_case  = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_source_history_yank_enable =1
+" file
+nnoremap <silent> <C-n> :<C-u>Unite file<CR>
+nnoremap <silent> <C-m> :<C-u>Unite file_mru<CR>
+nnoremap <silent> <C-d> :<C-u>Unite directory<CR>
+" grep
+nnoremap <silent> <C-g>      :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> <C-r><C-w> :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
+" use ag(The Silver Searcher)
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
+nnoremap <silent> ,b :<C-u>Unite buffer<CR>
+nnoremap <silent> ,t :<C-u>Unite tab<CR>
+
+" --- tagbar ---
+nnoremap <silent> <Leader>t :<C-u>TagbarToggle<CR>

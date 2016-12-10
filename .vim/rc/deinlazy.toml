@@ -10,10 +10,7 @@ repo = 'Shougo/unite-outline'
 on_source = 'unite.vim'
 
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'mileszs/ack.vim'
+repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'fatih/vim-go'
