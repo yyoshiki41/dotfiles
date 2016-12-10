@@ -387,8 +387,8 @@ let g:unite_enable_smart_case  = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_source_history_yank_enable =1
 " file
-nnoremap <silent> <C-n> :<C-u>Unite file<CR>
-nnoremap <silent> <C-m> :<C-u>Unite file_mru<CR>
+nnoremap <silent> <C-i> :<C-u>Unite file<CR>
+nnoremap <silent> <C-u> :<C-u>Unite file_mru<CR>
 nnoremap <silent> <C-d> :<C-u>Unite directory<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
