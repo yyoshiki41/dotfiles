@@ -106,6 +106,9 @@ alias ggl='grep -l -r'
 alias ggr='git grep'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
+# ag (default: Recurse into directories when searching.)
+alias agl='ag -l'
+alias agc='ag -c'
 # ls
 alias ls='ls -GF'
 alias ll='ls -lh'

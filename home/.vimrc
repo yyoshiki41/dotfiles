@@ -371,6 +371,7 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
 
+  autocmd FileType go nmap <Leader>e <Plug>(go-vet)
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
 
