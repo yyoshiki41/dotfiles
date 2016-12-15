@@ -89,13 +89,15 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
 ### Alias ###
+alias cdg='cd $GOPATH/src/github.com'
 alias v='/usr/local/bin/vim'
-alias vi='/usr/local/bin/vim'
-alias br='brew'
+alias whi='which'
 alias op='open'
+alias br='brew'
+alias bru='brew update'
 alias hb='hub browse'
 alias hc='hub compare'
-alias be='bundle exec'
+alias bu='bundle'
 alias gg='go get'
 alias ghg='ghq get'
 # grep
@@ -109,6 +111,9 @@ export GREP_COLOR='00;36'
 # ag (default: Recurse into directories when searching.)
 alias agl='ag -l'
 alias agc='ag -c'
+alias agA='ag -A'
+alias agB='ag -B'
+alias agC='ag -C'
 # ls
 alias ls='ls -GF'
 alias ll='ls -lh'
