@@ -405,4 +405,4 @@ nnoremap <silent> ,b :<C-u>Unite buffer<CR>
 nnoremap <silent> ,t :<C-u>Unite tab<CR>
 
 " --- tagbar ---
-nnoremap <silent> <Leader>t :<C-u>TagbarToggle<CR>
+nnoremap <silent> t :<C-u>TagbarToggle<CR>
