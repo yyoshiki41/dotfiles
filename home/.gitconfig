@@ -85,6 +85,7 @@
 # revert (rv)
         rv  = revert
         rvH = revert HEAD
+        rvm = revert -m 1
 # reset (rs)
         rs  = reset
         rss = reset --soft
