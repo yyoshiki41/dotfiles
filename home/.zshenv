@@ -3,6 +3,12 @@ export PATH=/usr/local/sbin:$PATH
 # For PostgreSQL
 export PGDATA=/usr/local/var/postgres
 
+# The next line updates PATH for the Google Cloud SDK.
+source '/usr/local/google-cloud-sdk/path.zsh.inc'
+# The next line enables shell command completion for gcloud.
+source '/usr/local/google-cloud-sdk/completion.zsh.inc'
+export PATH="/usr/local/google-cloud-sdk/bin:$PATH"
+
 # git extension for github
 #export PATH="$HOME/.git-hub:$PATH"
 # Added by the Heroku Toolbelt
