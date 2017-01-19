@@ -335,7 +335,8 @@ augroup END
 au BufWritePre *.go GoFmt
 au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
 au FileType go compiler go
-let g:syntastic_go_checkers = ['golint']
+let g:syntastic_go_checkers = ['golint', 'govet']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " --- vim-go ---
 let g:go_fmt_fail_silently = 0
@@ -344,6 +345,9 @@ let g:go_autodetect_gopath = 1
 let g:go_auto_sameids = 0
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['golint', 'vet']
+
 
 " highlight
 let g:go_highlight_format_strings = 1
