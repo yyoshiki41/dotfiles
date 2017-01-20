@@ -18,7 +18,7 @@ autoload -U colors && colors
 ### prompt ###
 ps_exit="\\(^o^)/"
 function precmd_01() {
-    if [ $? -ne 0 ]; then
+    if [ "$?" -ne 0 ]; then
         ps_exit="/(T_T)\\"
     else
         ps_exit="\\(^o^)/"
@@ -38,7 +38,9 @@ zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
+function precmd () {
+    vcs_info
+}
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # List direcory contents
@@ -47,10 +49,10 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 ### zsh-completions ###
-if [ -s ~/.zsh/completions ]; then
+if [ -f "${HOME}/.zsh/completions" ]; then
     fpath=(~/.zsh/completions $fpath)
 fi
-if [ -s /usr/local/share/zsh-completions ]; then
+if [ -f "/usr/local/share/zsh-completions" ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 # enable zsh completion
@@ -58,12 +60,12 @@ autoload -Uz compinit
 compinit -u
 
 # awscli completion
-if [ -s "/usr/local/share/zsh/site-functions/_aws" ]; then
+if [ -f "/usr/local/share/zsh/site-functions/_aws" ]; then
     source /usr/local/share/zsh/site-functions/_aws
 fi
 
 ### zsh_history ###
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=1048576
 SAVEHIST=1048576
 # historyを共有
@@ -123,7 +125,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # expand childa to $HOME {{{
 function expand-to-home() {
-  if [ "$LBUFFER" = "" -o "$LBUFFER[-1]" = " " ]; then
+  if [ "$LBUFFER" = "" ] || [ "$LBUFFER[-1]" = " " ]; then
     LBUFFER+="~/"
   else
     zle self-insert
@@ -144,11 +146,11 @@ fi
 function peco-history() {
     local tac
     if which tac > /dev/null; then
-        tac="tac"
+        kjtac="tac"
     else
         tac="tail -r"
     fi
-    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    BUFFER=$(fc -l -n 1 | eval "$tac" | peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle redisplay
 }
@@ -156,10 +158,11 @@ zle -N peco-history
 bindkey '^r' peco-history
 
 # z
-. `brew --prefix z`/etc/profile.d/z.sh
+. "$(brew --prefix z)/etc/profile.d/z.sh"
 # peco + z
 function peco-z() {
-    local res=$(z | sort -rn | cut -c 12- | peco)
+    local res
+    res=$(z | sort -rn | cut -c 12- | peco)
     if [ -n "$res" ]; then
         BUFFER="cd $res"
         zle accept-line
@@ -167,13 +170,14 @@ function peco-z() {
     zle redisplay
 }
 zle -N peco-z
-bindkey '^\' peco-z
+bindkey '^e' peco-z
 
 # peco + ghq
 function peco-ghq() {
-    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd $selected_dir"
+    local res
+    res=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$res" ]; then
+        BUFFER="cd $res"
         zle accept-line
     fi
     zle redisplay
@@ -183,7 +187,8 @@ bindkey '^[' peco-ghq
 
 # peco + hub browse
 function peco-hub-browse() {
-    local res=$(ghq list | grep "github.com" | cut -d "/" -f 2,3 | peco)
+    local res
+    res=$(ghq list | grep "github.com" | cut -d "/" -f 2,3 | peco)
     if [ -n "$res" ]; then
         BUFFER="hub browse $res"
         zle accept-line
@@ -194,13 +199,14 @@ zle -N peco-hub-browse
 bindkey '^]' peco-hub-browse
 
 # peco + hub issue
-function peco-hub-pr() {
-    local pr=$(hub issue 2> /dev/null | grep 'pull' | peco --query "$LBUFFER" | sed -e 's/.*( \(.*\) )$/\1/')
-    if [ -n "$pr" ]; then
-        BUFFER="open $pr"
+function peco-hub-issue() {
+    local res
+    res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
+    if [ -n "$res" ]; then
+        BUFFER="hub browse $(pwd | sed -e 's/.*github\.com\///') issues/$(echo "$res" | cut -d "#" -f 2 | cut -d " " -f 1)"
         zle accept-line
     fi
     zle redisplay
 }
-zle -N peco-hub-pr
-bindkey '^/' peco-hub-pr
+zle -N peco-hub-issue
+bindkey '^\' peco-hub-issue
