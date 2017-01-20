@@ -145,11 +145,7 @@ fi
 # peco + history
 function peco-history() {
     local tac
-    if which tac > /dev/null; then
-        kjtac="tac"
-    else
-        tac="tail -r"
-    fi
+    tac="perl -e 'print reverse <>'"
     BUFFER=$(fc -l -n 1 | eval "$tac" | peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle redisplay
