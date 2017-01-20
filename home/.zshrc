@@ -166,7 +166,7 @@ function peco-z() {
     zle redisplay
 }
 zle -N peco-z
-bindkey '^e' peco-z
+bindkey '^t' peco-z
 
 # peco + ghq
 function peco-ghq() {
