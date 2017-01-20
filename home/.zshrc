@@ -31,7 +31,7 @@ PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]# '
 # vcs_info
 autoload -Uz vcs_info
 # [current directory][git status]
-RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+RPROMPT="%{${fg[cyan]}%}[%~]%{${reset_color}%}"
 setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
@@ -44,9 +44,9 @@ function precmd () {
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # List direcory contents
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+export LSCOLORS=cxfxgxdxbxeghdabagacad
+export LS_COLORS='di=32:ln=35:so=36:pi=33:ex=31:bd=34;46:cd=37;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+zstyle ':completion:*' list-colors 'di=32' 'ln=35' 'so=36' 'ex=31' 'bd=34;46' 'cd=37;43'
 
 ### zsh-completions ###
 if [ -f "${HOME}/.zsh/completions" ]; then
