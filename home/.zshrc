@@ -100,6 +100,7 @@ alias bru='brew update'
 alias hb='hub browse'
 alias hc='hub compare'
 alias bu='bundle'
+alias dc='docker'
 alias gg='go get'
 alias ghg='ghq get'
 # grep
