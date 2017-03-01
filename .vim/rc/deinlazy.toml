@@ -2,12 +2,16 @@
 repo = 'Shougo/neomru.vim'
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo = 'Shougo/denite.nvim'
 depends = 'neomru.vim'
-
-[[plugins]]
-repo = 'Shougo/unite-outline'
-on_source = 'unite.vim'
+hook_post_source = '''
+call denite#custom#option('_', 'mode', 'normal')
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('grep', 'command', ['ag', '--follow', '--no-group', '--no-color'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', [ '.git/', 'node_modules/', '__pycache__/', 'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+'''
 
 [[plugins]]
 repo = 'majutsushi/tagbar'

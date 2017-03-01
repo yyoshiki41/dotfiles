@@ -387,26 +387,17 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
 augroup END
 
-" --- unite.vim ---
-nnoremap <silent> <Leader>u :<C-u>Unite<CR>
-let g:unite_enable_smart_case  = 1
-let g:unite_enable_ignore_case = 1
-let g:unite_source_history_yank_enable =1
+" --- denite.nvim ---
+nnoremap <silent> <Leader>u :<C-u>Denite<CR>
+nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>r :<C-u>Denite -resume<CR>
 " file
-nnoremap <silent> <C-o> :<C-u>Unite file<CR>
-nnoremap <silent> <C-d> :<C-u>Unite directory<CR>
+nnoremap <silent> <C-o> :<C-u>Denite file_rec<CR>
+nnoremap <silent> <C-r> :<C-u>Denite file_mru<CR>
+nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
 " grep
-nnoremap <silent> <C-g>      :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> <C-r><C-w> :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
-" use ag(The Silver Searcher)
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
-nnoremap <silent> ,b :<C-u>Unite buffer<CR>
-nnoremap <silent> ,t :<C-u>Unite tab<CR>
+nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
+nnoremap <silent> <C-r><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
 
 " --- tagbar ---
 nnoremap <silent> t :<C-u>TagbarToggle<CR>
