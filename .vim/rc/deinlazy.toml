@@ -16,11 +16,22 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', [ '.git/', 'no
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
-on_ft = ['go', 'rb', 'py', 'ts', 'js']
+on_ft = ['go', 'rb', 'py', 'ts', 'javascript']
 
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['javascript']
+hook_add = '''
+let g:jsx_ext_required = 0
+'''
+
+[[plugins]]
+repo = 'MaxMEllon/vim-jsx-pretty'
+on_ft = ['javascript']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
