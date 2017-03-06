@@ -208,3 +208,12 @@ function peco-hub-issue() {
 }
 zle -N peco-hub-issue
 bindkey '^\' peco-hub-issue
+
+# ag + peco + vim
+function gv {
+    local res
+    res=$(ag -n ${1} | peco | awk -F ":" '{print "-c "$2" "$1}')
+    if [ -n "$res" ]; then
+        vim $res
+    fi
+}
