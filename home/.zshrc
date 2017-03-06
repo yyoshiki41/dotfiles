@@ -212,8 +212,16 @@ bindkey '^\' peco-hub-issue
 # ag + peco + vim
 function gv {
     local res
-    res=$(ag -n ${1} | peco | awk -F ":" '{print "-c "$2" "$1}')
+    res=$(ag ${1} | peco | awk -F ":" '{print "-c "$2" "$1}')
     if [ -n "$res" ]; then
         vim $res
+    fi
+}
+# ag + peco + less
+function gl {
+    local res
+    res=$(ag ${1} | peco | awk -F ":" '{print "+"$2" "$1}')
+    if [ -n "$res" ]; then
+        less $res
     fi
 }
