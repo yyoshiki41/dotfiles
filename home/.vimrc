@@ -348,7 +348,6 @@ let g:go_list_type = "quickfix"
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['golint', 'vet']
 
-
 " highlight
 let g:go_highlight_format_strings = 1
 let g:go_highlight_build_constraints = 1
@@ -386,6 +385,11 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
 augroup END
+
+" --- hclfmt ---
+let g:hcl_fmt_autosave = 0
+let g:tf_fmt_autosave = 0
+let g:nomad_fmt_autosave = 0
 
 " --- denite.nvim ---
 nnoremap <silent> <Leader>u :<C-u>Denite<CR>
