@@ -39,4 +39,4 @@ on_ft = 'ts'
 
 [[plugins]]
 repo = 'fatih/vim-hclfmt'
-on_ft = ['hcl', 'tf']
+on_ft = ['hcl', 'tf', 'tfvars']
