@@ -386,6 +386,14 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
 augroup END
 
+augroup MyJavaScript
+  autocmd!
+
+  autocmd FileType javascript setlocal shiftwidth=2
+  autocmd FileType javascript setlocal expandtab
+  autocmd FileType javascript setlocal cindent
+augroup END
+
 " --- hclfmt ---
 let g:hcl_fmt_autosave = 0
 let g:tf_fmt_autosave = 0
