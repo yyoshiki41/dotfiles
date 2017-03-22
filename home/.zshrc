@@ -122,6 +122,9 @@ alias agC='ag -C'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
+# less
+export LESS='-R'
+export LESSOPEN='| /usr/local/bin/source-highlight-esc.sh %s'
 # echo formatted $PATH
 alias path='echo -e ${PATH//:/\\n}'
 
