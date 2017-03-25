@@ -16,7 +16,7 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', [ '.git/', 'no
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
-on_ft = ['go', 'rb', 'py', 'ts', 'javascript']
+on_ft = ['go', 'rb', 'py', 'typescript', 'javascript']
 
 [[plugins]]
 repo = 'fatih/vim-go'
@@ -35,7 +35,7 @@ on_ft = ['javascript']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = 'ts'
+on_ft = ['typescript']
 
 [[plugins]]
 repo = 'fatih/vim-hclfmt'
