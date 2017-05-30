@@ -6,6 +6,7 @@ export PGDATA=/usr/local/var/postgres
 
 # Added by Android SDK
 export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 source "/usr/local/google-cloud-sdk/path.zsh.inc"

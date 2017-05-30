@@ -395,8 +395,8 @@ augroup MyJavaScript
 augroup END
 
 " --- hclfmt ---
-let g:hcl_fmt_autosave = 0
-let g:tf_fmt_autosave = 0
+let g:hcl_fmt_autosave = 1
+let g:tf_fmt_autosave = 1
 let g:nomad_fmt_autosave = 0
 
 " --- denite.nvim ---
