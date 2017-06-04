@@ -1,7 +1,7 @@
 # go version manager
 if [ -s "$HOME/.gvm/scripts/gvm" ]; then
   source "$HOME/.gvm/scripts/gvm"
-  gvm use go1.8.1
+  gvm use go1.8.3
 fi
 
 ### GOPATH ###
