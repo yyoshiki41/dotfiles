@@ -222,15 +222,15 @@ function peco-file() {
     fi
 }
 zle -N peco-file
-bindkey '^f' peco-file
+bindkey '^o' peco-file
 
 # peco + ag -i
 function peco-grep-file() {
     if [ -n "$BUFFER" ]; then
         local res
-        res=$(ag ${BUFFER} | peco | awk -F ":" '{print "-c "$2" "$1}')
+        res=$(ag "$BUFFER" | awk -F ":" '{print $2": "$1}' | peco)
         if [ -n "$res" ]; then
-            local filepath=$(echo "$res" | cut -d " " -f 3)
+            local filepath=$(echo "$res" | cut -d " " -f 2)
             BUFFER="vim $filepath"
             zle accept-line
         fi
