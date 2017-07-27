@@ -166,6 +166,13 @@ nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 " --- tabline ---
 " open tabe edit
 nnoremap tt :<C-u>tabe<Space>
+" open tabe using peco
+function! PecoOpen()
+  for filename in split(system("ag -l | peco"), "\n")
+    execute "tabe" filename
+  endfor
+endfunction
+nnoremap <Leader>o :call PecoOpen()<CR>
 " show tabline
 set showtabline=2
 function! s:SID_PREFIX()
