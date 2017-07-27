@@ -93,6 +93,7 @@ zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 ### Alias ###
 alias cdg='cd $GOPATH/src/github.com'
 alias v='/usr/local/bin/vim'
+alias g='/usr/local/bin/git'
 alias whi='which'
 alias o='open .'
 alias op='open'
@@ -212,19 +213,33 @@ function peco-hub-issue() {
 zle -N peco-hub-issue
 bindkey '^\' peco-hub-issue
 
-# ag + peco + vim
-function gv {
-    local res
-    res=$(ag ${1} | peco | awk -F ":" '{print "-c "$2" "$1}')
-    if [ -n "$res" ]; then
-        vim $res
+# peco + ag -l
+function peco-file() {
+    local filepath=$(ag -l | peco --prompt 'PATH >')
+    if [ -n "$filepath" ]; then
+        BUFFER="vim $filepath"
+        zle accept-line
     fi
 }
-# ag + peco + less
-function gl {
-    local res
-    res=$(ag ${1} | peco | awk -F ":" '{print "+"$2" "$1}')
-    if [ -n "$res" ]; then
-        less $res
+zle -N peco-file
+bindkey '^f' peco-file
+
+# peco + ag -i
+function peco-grep-file() {
+    if [ -n "$BUFFER" ]; then
+        local res
+        res=$(ag ${BUFFER} | peco | awk -F ":" '{print "-c "$2" "$1}')
+        if [ -n "$res" ]; then
+            local filepath=$(echo "$res" | cut -d " " -f 3)
+            BUFFER="vim $filepath"
+            zle accept-line
+        fi
     fi
+}
+zle -N peco-grep-file
+bindkey '^g' peco-grep-file
+
+# peco + aws ec2 describe-instances
+function se {
+    aws ec2 describe-instances --output text --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value|[0],InstanceId,PrivateIpAddress,PublicIpAddress,State.Name]' 2> /dev/null | peco
 }
