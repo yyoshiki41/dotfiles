@@ -212,6 +212,7 @@ set splitbelow
 set splitright
 
 " ---insert mode---
+inoremap <silent> jj <ESC>
 " Map auto complete of {, [, (, ", '
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -226,7 +227,7 @@ inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-d> <Del>
-inoremap <C-k> <Esc>lc$
+inoremap <C-k> <ESC>lc$
 " command+p 時に、autoindent off
 if &term =~ "xterm"
   let &t_ti .= "\e[?2004h"
@@ -243,8 +244,8 @@ if &term =~ "xterm"
 endif
 
 " ---command-line---
-" % 2回で、アクティブなバッファのpath展開
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" アクティブなバッファのpath展開
+cnoremap <expr> tt getcmdtype() == ':' ? expand('%:h').'/' : 'tt'
 " emacs key bindings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
