@@ -106,7 +106,7 @@ set noexpandtab
 set smarttab
 set shiftround
 " tab は半角4文字分のスペース
-set ts=4 sw=4 sts=0
+"set ts=4 sw=4 sts=0
 " tab, EOFなどを可視化
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
