@@ -421,3 +421,7 @@ nnoremap <silent> <C-r><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buf
 
 " --- tagbar ---
 nnoremap <silent> t :<C-u>TagbarToggle<CR>
+
+" --- EdgeMotion ---
+map <C-j> <Plug>(edgemotion-j)
+map <C-k> <Plug>(edgemotion-k)
