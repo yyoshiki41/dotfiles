@@ -15,6 +15,3 @@ on_ft = ['yaml, yml', 'j2']
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml', 'tml']
-
-[[plugins]]
-repo = 'haya14busa/vim-edgemotion'
