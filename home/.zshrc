@@ -68,12 +68,15 @@ fi
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1048576
 SAVEHIST=1048576
-# historyを共有
 setopt share_history
-# 補完時にhistoryを自動的に展開する
-setopt hist_expand
-# 同じコマンドの場合、古い方を削除
 setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_reduce_blanks
+# The format of history is below
+# ": <beginning time>:<elapsed seconds>;<command>"
+setopt extended_history
+# 補完時にhistoryを展開する
+setopt hist_expand
 
 # direcory名で移動
 setopt auto_cd
@@ -177,9 +180,10 @@ bindkey '^t' peco-z
 # peco + ghq
 function peco-ghq() {
     local res
-    res=$(ghq list --full-path | peco --query "$LBUFFER")
+    res=$(ghq list -e | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
-        BUFFER="cd $res"
+        local ghqroot="~/repos/src"
+        BUFFER="cd ${ghqroot}/${res}"
         zle accept-line
     fi
     zle redisplay
@@ -238,6 +242,14 @@ function peco-grep-file() {
 }
 zle -N peco-grep-file
 bindkey '^g' peco-grep-file
+
+# peco + git log
+function gl {
+    local res=$(git log --oneline --no-color | peco)
+    if [ -n "$res" ]; then
+        hub browse -- commit/"$(echo "$res" | cut -d " " -f 1)"
+    fi
+}
 
 # peco + aws ec2 describe-instances
 function se {
