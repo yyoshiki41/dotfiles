@@ -7,8 +7,13 @@ execute "source ~/.vimrc.dein"
 
 filetype indent on
 filetype plugin on
-" terminal接続を高速にする
+" Indicate fast terminal conn for faster redraw
 set ttyfast
+" Indicate terminal type for mouse codes
+set mouse=a
+set ttymouse=xterm2
+" Speedup scrolling
+set ttyscroll=3
 " 前回終了時のcursor 位置で起動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 " Create the directory which a new file will reside in
@@ -23,11 +28,15 @@ set belloff=all
 " Do not create backup and swapfile
 set nobackup
 set noswapfile
-" backspace で消せるようにする
+" Makes backspace key more powerful.
 set backspace=start,eol,indent
+" Buffer should still exist if window is closed
+set hidden
 " Copy to clipboard without pbcopy
-"set clipboard^=unnamed
-"set clipboard^=unnamedplus
+if has('unnamedplus')
+  set clipboard^=unnamed
+  set clipboard^=unnamedplus
+endif
 " insert mode をぬけるとIMEオフ
 set noimdisable
 set iminsert=0 imsearch=0
@@ -89,7 +98,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set showmatch
 " Show status line
 set laststatus=2
-" Show command
+" Show me what I'm typing
 set showcmd
 " Turn on the WiLd menu
 set wildmenu
@@ -278,13 +287,13 @@ endfunction
 vnoremap <silent> <expr> p <sid>Repl()
 
 " ---search---
-" incremental search
+" Show the match while typing
 set incsearch
 " 検索文字列が小文字の場合は大文字小文字を区別しない
 set ignorecase
 " 検索文字列に大文字が含まれている場合は区別する
 set smartcase
-" highlight
+" Highlight found searches
 set hlsearch
 highlight Search ctermbg=22 guibg=#005f00
 " Esc 2回でhighlightをclear
@@ -341,7 +350,7 @@ augroup END
 
 " --- Go ---
 au BufWritePre *.go GoFmt
-au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 completeopt=menu,menuone,preview
 au FileType go compiler go
 let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
@@ -353,7 +362,8 @@ let g:go_autodetect_gopath = 1
 let g:go_auto_sameids = 0
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
-let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['golint', 'vet']
 
 " highlight
