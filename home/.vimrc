@@ -10,7 +10,6 @@ filetype plugin on
 " Indicate fast terminal conn for faster redraw
 set ttyfast
 " Indicate terminal type for mouse codes
-set mouse=a
 set ttymouse=xterm2
 " Speedup scrolling
 set ttyscroll=3
