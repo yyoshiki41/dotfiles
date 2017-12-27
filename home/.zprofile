@@ -7,4 +7,4 @@ source "$HOME/.lan/node.util"
 
 # Control system resources
 ulimit -u 512
-ulimit -n 4096
+ulimit -n 16384
