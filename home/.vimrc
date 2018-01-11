@@ -325,6 +325,24 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
+" --- ale ---
+let g:ale_sign_column_always = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_echo_msg_format = '[%severity%] %linter%: %s'
+
+nmap <silent> <Leader>p <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>n <Plug>(ale_next_wrap)
+
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'json': ['prettier'],
+\   'python': ['isort'],
+\}
+let g:ale_fix_on_save = 1
+
 " --- markdown ---
 set syntax=markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
@@ -333,6 +351,7 @@ let g:markdown_fenced_languages = [
       \  'xml',
       \  'vim',
       \  'ruby',
+      \  'python',
       \  'javascript',
       \  'js=javascript',
       \  'json=javascript',
@@ -341,7 +360,6 @@ let g:markdown_fenced_languages = [
       \]
 
 " --- shell ---
-let g:syntastic_sh_checkers = ['shellcheck']
 augroup MyShell
   autocmd!
   autocmd BufNewFile *.sh put='#!/bin/bash' | exe ':g/^$/d'
@@ -351,8 +369,6 @@ augroup END
 au BufWritePre *.go GoFmt
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 completeopt=menu,menuone,preview
 au FileType go compiler go
-let g:syntastic_go_checkers = ['golint', 'govet']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " --- vim-go ---
 let g:go_fmt_fail_silently = 0
@@ -427,6 +443,3 @@ nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
 nnoremap <silent> <C-r><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
-
-" --- tagbar ---
-nnoremap <silent> t :<C-u>TagbarToggle<CR>

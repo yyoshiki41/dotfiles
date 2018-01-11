@@ -6,12 +6,4 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
-
-[[plugins]]
-repo = 'pearofducks/ansible-vim'
-on_ft = ['yaml', 'yml', 'j2']
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml', 'tml']
+repo = 'w0rp/ale'
