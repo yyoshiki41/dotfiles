@@ -6,8 +6,6 @@
 [color]
 	ui = true
 	diff = always
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -17,6 +15,10 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[github]
+	user = yyoshiki41
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [ghq]
 	root = ~/repos/src
 
