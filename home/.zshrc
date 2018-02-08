@@ -101,7 +101,6 @@ alias whi='which'
 alias o='open'
 alias oo='open .'
 alias br='brew'
-alias bru='brew update'
 alias hb='hub browse'
 alias hc='hub compare'
 alias bu='bundle'
@@ -129,6 +128,8 @@ alias la='ls -lAh'
 # less
 export LESS='-R'
 export LESSOPEN='| /usr/local/bin/source-highlight-esc.sh %s'
+# octave
+alias octave='/usr/local/octave/3.8.0/bin/octave'
 # echo formatted $PATH
 alias path='echo -e ${PATH//:/\\n}'
 
