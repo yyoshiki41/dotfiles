@@ -1,9 +1,6 @@
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-# For PostgreSQL
-export PGDATA=/usr/local/var/postgres
-
 # Added by Android SDK
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
@@ -19,8 +16,8 @@ if [ -f "$HOME/.travis/travis.sh" ]; then
   source "$HOME/.travis/travis.sh"
 fi
 
-# git extension for github
-#export PATH="$HOME/.git-hub:$PATH"
+# For PostgreSQL
+#export PGDATA=/usr/local/var/postgres
 
 # Added by the Heroku Toolbelt
 #export PATH="/usr/local/heroku/bin:$PATH"
@@ -30,6 +27,7 @@ fi
 
 # For latex
 #export PATH=/usr/local/bin:/usr/local/texlive/2014/bin/x86_64-darwin:$PATH
+
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # NOTE:
