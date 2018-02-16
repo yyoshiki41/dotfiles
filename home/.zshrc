@@ -59,11 +59,6 @@ fi
 autoload -Uz compinit
 compinit -u
 
-# awscli completion
-if [ -f "/usr/local/share/zsh/site-functions/_aws" ]; then
-    source /usr/local/share/zsh/site-functions/_aws
-fi
-
 ### zsh_history ###
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1048576
