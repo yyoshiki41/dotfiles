@@ -1,7 +1,5 @@
 ### Go ###
 source "$HOME/.lan/go.util"
-### Ruby ###
-source "$HOME/.lan/ruby.util"
 ### Node ###
 source "$HOME/.lan/node.util"
 
