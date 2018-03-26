@@ -206,7 +206,8 @@ function peco-hub-issue() {
     local res
     res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
-        BUFFER="hub browse $(pwd | sed -e 's/.*github\.com\///') issues/$(echo "$res" | cut -d "#" -f 2 | cut -d " " -f 1)"
+        n=`echo ${res/]*/}`
+        BUFFER="hub browse ${PWD/\/*github\.com\//} issues/$n"
         zle accept-line
     fi
     zle redisplay
