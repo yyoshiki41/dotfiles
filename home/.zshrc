@@ -98,6 +98,7 @@ alias oo='open .'
 alias oc='open -a "Google Chrome.app"'
 alias br='brew'
 alias hb='hub browse'
+alias hi='hub browse -- issues'
 alias hc='hub compare'
 alias bu='bundle'
 alias dc='docker'
@@ -207,7 +208,7 @@ function peco-hub-issue() {
     res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
         n=`echo ${res/]*/}`
-        BUFFER="hub browse ${PWD/\/*github\.com\//} issues/$n"
+        BUFFER="hub browse -- issues/$n"
         zle accept-line
     fi
     zle redisplay
