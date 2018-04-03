@@ -88,30 +88,42 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
+# z
+. "$(brew --prefix z)/etc/profile.d/z.sh"
+# grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='00;36'
+# less
+export LESS='-R'
+export LESSOPEN='| /usr/local/bin/source-highlight-esc.sh %s'
+
 ### Alias ###
-alias cdg='cd $GOPATH/src/github.com'
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
 alias whi='which'
+alias br='brew'
+alias bu='bundle'
+alias dc='docker'
+alias cdg='cd $GOPATH/src/github.com'
+alias gg='go get'
+alias gq='ghq get'
+# open
 alias o='open'
 alias oo='open .'
 alias oc='open -a "Google Chrome.app"'
-alias br='brew'
-alias hb='hub browse'
-alias hi='hub browse -- issues'
+# hub
+alias hb='hub browse --'
+alias hbc='hub browse -- commits'
+alias hbp='hub browse -- pulls'
+alias hbi='hub browse -- issues'
+alias hbb='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f 2,3) }'
 alias hc='hub compare'
-alias bu='bundle'
-alias dc='docker'
-alias gg='go get'
-alias ghg='ghq get'
+# echo formatted $PATH
+alias path='echo -e ${PATH//:/\\n}'
 # grep
 alias -g G='| grep'
 alias gr='grep'
-alias ggn='grep -n -r'
-alias ggl='grep -l -r'
 alias ggr='git grep'
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='00;36'
 # ag (default: Recurse into directories when searching.)
 alias agl='ag -l'
 alias agc='ag -c'
@@ -122,13 +134,8 @@ alias agC='ag -C'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
-# less
-export LESS='-R'
-export LESSOPEN='| /usr/local/bin/source-highlight-esc.sh %s'
 # octave
 alias octave='/usr/local/octave/3.8.0/bin/octave'
-# echo formatted $PATH
-alias path='echo -e ${PATH//:/\\n}'
 
 # expand childa to $HOME {{{
 function expand-to-home() {
@@ -148,11 +155,10 @@ if which direnv > /dev/null; then
 fi
 
 
-### Useful Commands ###
-# peco + history
+### peco ###
+# history
 function peco-history() {
-    local tac
-    tac="perl -e 'print reverse <>'"
+    local tac="perl -e 'print reverse <>'"
     BUFFER=$(fc -l -n 1 | eval "$tac" | peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle redisplay
@@ -161,11 +167,8 @@ zle -N peco-history
 bindkey '^r' peco-history
 
 # z
-. "$(brew --prefix z)/etc/profile.d/z.sh"
-# peco + z
 function peco-z() {
-    local res
-    res=$(z | sort -rn | cut -c 12- | peco)
+    local res=$(z | sort -rn | cut -c 12- | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
         BUFFER="cd $res"
         zle accept-line
@@ -173,52 +176,11 @@ function peco-z() {
     zle redisplay
 }
 zle -N peco-z
-bindkey '^t' peco-z
+bindkey '^z' peco-z
 
-# peco + ghq
-function peco-ghq() {
-    local res
-    res=$(ghq list -e | peco --query "$LBUFFER")
-    if [ -n "$res" ]; then
-        local ghqroot="~/repos/src"
-        BUFFER="cd ${ghqroot}/${res}"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-ghq
-bindkey '^[' peco-ghq
-
-# peco + hub browse
-function peco-hub-browse() {
-    local res
-    res=$(ghq list | grep "github.com" | cut -d "/" -f 2,3 | peco)
-    if [ -n "$res" ]; then
-        BUFFER="hub browse $res"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-hub-browse
-bindkey '^]' peco-hub-browse
-
-# peco + hub issue
-function peco-hub-issue() {
-    local res
-    res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
-    if [ -n "$res" ]; then
-        n=`echo ${res/]*/}`
-        BUFFER="hub browse -- issues/$n"
-        zle accept-line
-    fi
-    zle redisplay
-}
-zle -N peco-hub-issue
-bindkey '^\' peco-hub-issue
-
-# peco + ag -l
+# vim
 function peco-file() {
-    local filepath=$(ag -l | peco --prompt 'PATH >')
+    local filepath=$(ag -l | peco --query "$BUFFER")
     if [ -n "$filepath" ]; then
         BUFFER="vim $filepath"
         zle accept-line
@@ -227,28 +189,58 @@ function peco-file() {
 zle -N peco-file
 bindkey '^o' peco-file
 
-# peco + ag -i
-function peco-grep-file() {
-    if [ -n "$BUFFER" ]; then
-        local res
-        res=$(ag "$BUFFER" | awk -F ":" '{print $2": "$1}' | peco)
-        if [ -n "$res" ]; then
-            local filepath=$(echo "$res" | cut -d " " -f 2)
-            BUFFER="vim $filepath"
-            zle accept-line
-        fi
-    fi
-}
-zle -N peco-grep-file
-bindkey '^g' peco-grep-file
-
-# peco + git log
-function gl {
-    local res=$(git log --oneline --no-color | peco)
+# Move the repository dir filtered by ghq
+function peco-ghq-cd() {
+    local res=$(ghq list -e | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
-        hub browse -- commit/"$(echo "$res" | cut -d " " -f 1)"
+        local ghqroot="~/repos/src"
+        BUFFER="cd ${ghqroot}/${res}"
+        zle accept-line
     fi
+    zle redisplay
 }
+zle -N peco-ghq-cd
+bindkey '^t' peco-ghq-cd
+
+# hub browse -- tree/branch/path/to/file
+function peco-hub-browse-file() {
+    local filepath=$(ag -l | peco --query "$LBUFFER")
+    if [ -n "$filepath" ]; then
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        prefix=$(git rev-parse --show-prefix)
+        BUFFER="hub browse -- tree/$branch/$prefix/$filepath"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-hub-browse-file
+bindkey '^[' peco-hub-browse-file
+
+# hub browse -- issues/number
+function peco-hub-browse-issues() {
+    local res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
+    if [ -n "$res" ]; then
+        n=`echo ${res/]*/}`
+        BUFFER="hub browse -- issues/$n"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-hub-browse-issues
+bindkey '^]' peco-hub-browse-issues
+
+# hub browse -- commit/hash
+function peco-hub-browse-commit() {
+    local res=$(git log --oneline --no-color | peco --query "$LBUFFER")
+    if [ -n "$res" ]; then
+        h=$(echo "$res" | cut -d " " -f 1)
+        BUFFER="hub browse -- commit/$h"
+        zle accept-line
+    fi
+    zle redisplay
+}
+zle -N peco-hub-browse-commit
+bindkey '^\' peco-hub-browse-commit
 
 # peco + aws ec2 describe-instances
 function se {
