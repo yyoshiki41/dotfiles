@@ -189,6 +189,19 @@ function peco-file() {
 zle -N peco-file
 bindkey '^o' peco-file
 
+# ag + vim
+function peco-file-ag() {
+    if [ -n "$BUFFER" ]; then
+        local filepath=$(ag -l "$BUFFER" | peco)
+        if [ -n "$filepath" ]; then
+            BUFFER="vim $filepath"
+            zle accept-line
+        fi
+    fi
+}
+zle -N peco-file-ag
+bindkey '^g' peco-file-ag
+
 # Move the repository dir filtered by ghq
 function peco-ghq-cd() {
     local res=$(ghq list -e | peco --query "$LBUFFER")
