@@ -14,6 +14,8 @@ setopt correct
 bindkey -e
 # colors
 autoload -U colors && colors
+# zsh hooks
+autoload -Uz add-zsh-hook
 
 ### prompt ###
 ps_exit="\\(^o^)/"
@@ -25,7 +27,6 @@ function precmd_01() {
     fi
 }
 
-autoload -Uz add-zsh-hook
 add-zsh-hook precmd precmd_01
 PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]# '
 # vcs_info
@@ -73,8 +74,6 @@ setopt extended_history
 # 補完時にhistoryを展開する
 setopt hist_expand
 
-# direcory名で移動
-setopt auto_cd
 # 自動でリストアップ
 setopt auto_list
 # cd したら自動的にpushdする
@@ -87,6 +86,8 @@ DIRSTACKSIZE=10
 zstyle ':completion:*' menu select
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
+# Call ls command every time the current directory is changed
+function chpwd() { ls }
 
 # z
 . "$(brew --prefix z)/etc/profile.d/z.sh"
