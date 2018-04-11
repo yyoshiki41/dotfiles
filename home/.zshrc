@@ -87,7 +87,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 # Call ls command every time the current directory is changed
-function chpwd() { ls }
+function chpwd() { ls -G }
 
 # z
 . "$(brew --prefix z)/etc/profile.d/z.sh"
