@@ -96,7 +96,7 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
 # less
 export LESS='-R'
-export LESSOPEN='| /usr/local/bin/source-highlight-esc.sh %s'
+export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
 
 ### Alias ###
 alias v='/usr/local/bin/vim'
