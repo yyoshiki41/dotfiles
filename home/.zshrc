@@ -28,7 +28,7 @@ function precmd_01() {
 }
 
 add-zsh-hook precmd precmd_01
-PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]# '
+PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]$ '
 # vcs_info
 autoload -Uz vcs_info
 # [current directory][git status]
@@ -42,7 +42,7 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
 function precmd () {
     vcs_info
 }
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+RPROMPT='${vcs_info_msg_0_}'$RPROMPT
 
 # List direcory contents
 export LSCOLORS=cxfxgxdxbxeghdabagacad
@@ -59,6 +59,10 @@ fi
 # enable zsh completion
 autoload -Uz compinit
 compinit -u
+# zsh-syntax-highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh-autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### zsh_history ###
 HISTFILE=$HOME/.zsh_history
@@ -96,7 +100,7 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
 # less
 export LESS='-R'
-export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
+export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
 
 ### Alias ###
 alias v='/usr/local/bin/vim'
