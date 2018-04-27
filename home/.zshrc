@@ -112,6 +112,7 @@ alias dc='docker'
 alias cdg='cd $GOPATH/src/github.com'
 alias gg='go get'
 alias gq='ghq get'
+alias tf='terraform'
 # open
 alias o='open'
 alias oo='open .'
@@ -139,6 +140,7 @@ alias agC='ag -C'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
+alias lsw='(){ la $(which $1) }'
 # octave
 alias octave='/usr/local/octave/3.8.0/bin/octave'
 
