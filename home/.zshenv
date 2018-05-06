@@ -11,6 +11,11 @@ source "/usr/local/google-cloud-sdk/path.zsh.inc"
 source "/usr/local/google-cloud-sdk/completion.zsh.inc"
 export PATH="/usr/local/google-cloud-sdk/bin:$PATH"
 
+# yarn
+# FIXME: https://github.com/nodejs/node/issues/19079
+# export PATH="$(yarn global bin):$PATH"
+export PATH="$(yarn global bin 2> /dev/null):$PATH"
+
 # Added by travis gem
 if [ -f "$HOME/.travis/travis.sh" ]; then
   source "$HOME/.travis/travis.sh"
