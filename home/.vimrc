@@ -138,10 +138,9 @@ set scrolloff=5
 " 0 で行頭, 9で行末
 nnoremap 0 ^
 nnoremap 9 $
-" tab で対応ペアに移動
+" Go to newer cursor position in jump list using tab keyboard
 nnoremap <Tab> %
 vnoremap <Tab> %
-nnoremap <C-r> *
 " Highlight when CursorMoved
 set cpoptions-=m
 set matchtime=1
@@ -438,8 +437,8 @@ nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>r :<C-u>Denite -resume<CR>
 " file
 nnoremap <silent> <C-o> :<C-u>Denite file_rec<CR>
-nnoremap <silent> <C-r> :<C-u>Denite file_mru<CR>
+nnoremap <silent> <C-O> :<C-u>Denite file_mru<CR>
 nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
-nnoremap <silent> <C-r><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
+nnoremap <silent> <C-g><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
