@@ -407,9 +407,10 @@ augroup MyGolang
   autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
 
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
-  autocmd FileType go nmap <Leader>i <Plug>(go-implements)
+  autocmd FileType go nmap <Leader>m <Plug>(go-implements)
   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
 
+  autocmd FileType go nmap <Leader>i <Plug>(go-iferr)
   autocmd FileType go nmap <Leader>r <Plug>(go-run)
   autocmd FileType go nmap <Leader>b <Plug>(go-build)
   autocmd FileType go nmap <Leader>test <Plug>(go-test)
