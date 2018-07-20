@@ -25,7 +25,6 @@ $ cd dotfiles
 $ make init
 ```
 
-
 ## Appendix
 
 ### ■ For vim-latex

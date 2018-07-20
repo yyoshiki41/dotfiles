@@ -26,7 +26,7 @@ let g:jsx_ext_required = 0
 '''
 
 [[plugins]]
-repo = 'suan/vim-instant-markdown'
+repo = 'previm/previm'
 on_ft = ['md', 'markdown']
 
 [[plugins]]

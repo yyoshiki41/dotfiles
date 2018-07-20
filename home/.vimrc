@@ -357,6 +357,8 @@ let g:markdown_fenced_languages = [
       \  'sass',
       \  'css',
       \]
+let g:previm_open_cmd = 'open -a "Google Chrome.app"'
+nnoremap <silent> <Leader>mp :<C-u>PrevimOpen<CR>
 
 " --- shell ---
 augroup MyShell
