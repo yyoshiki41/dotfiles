@@ -106,7 +106,8 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
 alias whi='which'
-alias br='brew'
+# FIXME: python 3.7 が上手く動くまで、brew upgrade しない
+# alias br='brew'
 alias bu='bundle'
 alias dc='docker'
 alias cdg='cd $GOPATH/src/github.com'
@@ -141,8 +142,8 @@ alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias lsw='(){ la $(which $1) }'
-# octave
-alias octave='/usr/local/octave/3.8.0/bin/octave'
+# bat
+alias b='bat'
 
 # expand childa to $HOME {{{
 function expand-to-home() {
