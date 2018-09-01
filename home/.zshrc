@@ -119,6 +119,7 @@ alias o='open'
 alias oo='open .'
 alias oc='open -a "Google Chrome.app"'
 # hub
+eval "$(hub alias -s)"
 alias hb='hub browse --'
 alias hbc='hub browse -- commits'
 alias hbp='hub browse -- pulls'
