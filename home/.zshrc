@@ -106,8 +106,7 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
 alias whi='which'
-# FIXME: python 3.7 が上手く動くまで、brew upgrade しない
-# alias br='brew'
+alias br='brew'
 alias bu='bundle'
 alias dc='docker'
 alias cdg='cd $GOPATH/src/github.com'
