@@ -133,6 +133,7 @@ alias gr='grep'
 alias ggr='git grep'
 # ag (default: Recurse into directories when searching.)
 alias agl='ag -l'
+alias agg='ag --go'
 alias agc='ag -c'
 alias agA='ag -A'
 alias agB='ag -B'
