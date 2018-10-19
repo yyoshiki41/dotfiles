@@ -337,6 +337,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
+\   'vue': ['prettier'],
 \   'json': ['prettier'],
 \   'python': ['isort'],
 \}
