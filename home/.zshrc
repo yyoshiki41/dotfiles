@@ -103,6 +103,12 @@ export LESS='-R'
 export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
 
 ### Alias ###
+# global alias
+alias -g H='| head'
+alias -g L='| less'
+alias -g G='| ag'
+alias -g P='| pbcopy'
+# command
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
 alias whi='which'
@@ -113,6 +119,8 @@ alias cdg='cd $GOPATH/src/github.com'
 alias gg='go get'
 alias gq='ghq get'
 alias tf='terraform'
+# echo formatted $PATH
+alias path='echo -e ${PATH//:/\\n}'
 # open
 alias o='open'
 alias oo='open .'
@@ -125,10 +133,7 @@ alias hbp='hub browse -- pulls'
 alias hbi='hub browse -- issues'
 alias hbb='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f 2,3) }'
 alias hc='hub compare'
-# echo formatted $PATH
-alias path='echo -e ${PATH//:/\\n}'
 # grep
-alias -g G='| grep'
 alias gr='grep'
 alias ggr='git grep'
 # ag (default: Recurse into directories when searching.)
@@ -139,12 +144,14 @@ alias agA='ag -A'
 alias agB='ag -B'
 alias agC='ag -C'
 # ls
+alias l='ls'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias lsw='(){ la $(which $1) }'
 # bat
 alias b='bat'
+alias bR='bat README.md'
 
 # expand childa to $HOME {{{
 function expand-to-home() {
