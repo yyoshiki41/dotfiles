@@ -335,9 +335,8 @@ nmap <silent> <Leader>n <Plug>(ale_next_wrap)
 
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
+\   'javascript': ['prettier', 'eslint'],
 \   'typescript': ['prettier'],
-\   'vue': ['prettier'],
 \   'json': ['prettier'],
 \   'python': ['isort'],
 \}

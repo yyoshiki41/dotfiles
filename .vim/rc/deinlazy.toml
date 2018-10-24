@@ -15,6 +15,12 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', [ '.git/', 'no
 '''
 
 [[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
 
@@ -30,25 +36,5 @@ repo = 'previm/previm'
 on_ft = ['md', 'markdown']
 
 [[plugins]]
-repo = 'MaxMEllon/vim-jsx-pretty'
-on_ft = ['javascript']
-
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript']
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml', 'tml']
-
-[[plugins]]
-repo = 'pearofducks/ansible-vim'
-on_ft = ['yaml', 'yml', 'j2']
-
-[[plugins]]
 repo = 'fatih/vim-hclfmt'
 on_ft = ['hcl', 'tf', 'tfvars']
-
-[[plugins]]
-repo = 'ekalinin/Dockerfile.vim'
-on_ft = ['Dockerfile', 'dockerfile']

@@ -6,4 +6,21 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'pearofducks/ansible-vim'
+on_ft = ['yaml', 'yml', 'j2']
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml', 'tml']
+
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+on_ft = ['Dockerfile', 'dockerfile']
+
+[[plugins]]
+repo = 'MaxMEllon/vim-jsx-pretty'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
