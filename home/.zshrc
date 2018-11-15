@@ -104,9 +104,10 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 
 ### Alias ###
 # global alias
-alias -g H='| head'
-alias -g L='| less'
 alias -g G='| ag'
+alias -g H='| head'
+alias -g J='| jq .'
+alias -g L='| less'
 alias -g P='| pbcopy'
 # command
 alias v='/usr/local/bin/vim'
