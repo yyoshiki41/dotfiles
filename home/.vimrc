@@ -334,6 +334,11 @@ nmap <silent> <Leader>p <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>n <Plug>(ale_next_wrap)
 
 let g:ale_javascript_prettier_use_local_config = 1
+" linters settings
+let g:ale_linters = {
+\   'go': [''],
+\}
+" fixers settings
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
