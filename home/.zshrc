@@ -94,7 +94,7 @@ zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 function chpwd() { ls -G }
 
 # z
-. "$(brew --prefix z)/etc/profile.d/z.sh"
+. "/usr/local/opt/z/etc/profile.d/z.sh"
 # grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
