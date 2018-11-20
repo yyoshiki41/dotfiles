@@ -99,20 +99,23 @@ function chpwd() { ls -G }
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
 # less
-export LESS='-R'
+alias l='less'
+export LESS='-I -R -M -W'
 export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
 
 ### Alias ###
 # global alias
 alias -g G='| ag'
 alias -g H='| head'
-alias -g J='| jq .'
+alias -g J='| jq -C .'
 alias -g L='| less'
 alias -g P='| pbcopy'
 # command
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
+alias m='man'
 alias whi='which'
+alias jq='jq -C'
 alias br='brew'
 alias bu='bundle'
 alias dc='docker'
@@ -145,7 +148,6 @@ alias agA='ag -A'
 alias agB='ag -B'
 alias agC='ag -C'
 # ls
-alias l='ls'
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
