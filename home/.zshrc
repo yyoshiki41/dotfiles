@@ -107,7 +107,7 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 # global alias
 alias -g G='| ag'
 alias -g H='| head'
-alias -g J='| jq -C .'
+alias -g J='| jq .'
 alias -g L='| less'
 alias -g P='| pbcopy'
 # command
@@ -155,6 +155,9 @@ alias lsw='(){ la $(which $1) }'
 # bat
 alias b='bat'
 alias bR='bat README.md'
+# tar
+alias tarc='tar cvfz' # Create a new archive
+alias tarx='tar xvfz' # Extract to disk from the archive
 
 # expand childa to $HOME {{{
 function expand-to-home() {
