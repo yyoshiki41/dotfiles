@@ -27,3 +27,10 @@ on_ft = ['javascript']
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['typescript']
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['go']

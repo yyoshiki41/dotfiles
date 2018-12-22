@@ -158,6 +158,9 @@ nnoremap <silent> [toggle]h :setl hlsearch!<CR>:setl hlsearch?<CR>
 " Use <Leader>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+" buffer
+nnoremap <silent> <Leader>p :bp<CR>
+nnoremap <silent> <Leader>n :bn<CR>
 
 " --- vimgrep ---
 " open quickfix-window
@@ -330,8 +333,8 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_echo_msg_format = '[%severity%] %linter%: %s'
 
-nmap <silent> <Leader>p <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>n <Plug>(ale_next_wrap)
+nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 let g:ale_javascript_prettier_use_local_config = 1
 " linters settings
@@ -403,24 +406,37 @@ let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
 let g:go_highlight_operators = 0
 
+" golsp + vim-lsp
+if executable('golsp')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
 augroup MyGolang
   autocmd!
 
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
-  autocmd FileType go nmap <Leader>t <Plug>(go-def-tab)
-  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  autocmd FileType go nmap <Leader>t <Plug>(lsp-definition)<CR>
+  autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
+  autocmd FileType go nnoremap <Leader>v :<C-u>vsplit<Space>\| :LspDefinition<CR>
 
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
-  autocmd FileType go nmap <Leader>m <Plug>(go-implements)
+  autocmd FileType go nmap <Leader>i <Plug>(go-implements)
   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
 
-  autocmd FileType go nmap <Leader>i <Plug>(go-iferr)
-  autocmd FileType go nmap <Leader>r <Plug>(go-run)
-  autocmd FileType go nmap <Leader>b <Plug>(go-build)
-  autocmd FileType go nmap <Leader>test <Plug>(go-test)
+  autocmd FileType go nmap <Leader>gi <Plug>(go-iferr)
+  autocmd FileType go nmap <Leader>go <Plug>(go-run)
+  autocmd FileType go nmap <Leader>gb <Plug>(go-build)
+  autocmd FileType go nmap <Leader>gs <Plug>(go-test)
 
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
   autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
