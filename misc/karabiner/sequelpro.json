@@ -1,0 +1,30 @@
+{
+  "title": "SequelPro",
+  "rules": [
+    {
+      "description": "Map left_control + h to delete/backspace in SequelPro",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": ["left_control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.sequelpro\\.SequelPro$"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

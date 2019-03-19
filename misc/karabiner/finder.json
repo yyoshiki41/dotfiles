@@ -1,0 +1,31 @@
+{
+  "title": "finder",
+  "rules": [
+    {
+      "description": "Map left_command + left_control + d to open Downloads finder in finder",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": ["left_command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l",
+              "modifiers": ["command", "option"]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.apple\\.finder$"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
