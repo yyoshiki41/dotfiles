@@ -386,6 +386,8 @@ let g:go_autodetect_gopath = 1
 let g:go_auto_sameids = 0
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
+let g:go_def_mode = "gopls"
+let g:go_metalinter_enabled = ['vet', 'golint']
 "let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['golint', 'vet']
@@ -406,17 +408,13 @@ let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
 let g:go_highlight_operators = 0
 
-" golsp + vim-lsp
-if executable('golsp')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+" gopls + vim-lsp
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
         \ 'whitelist': ['go'],
         \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-  augroup END
 endif
 
 augroup MyGolang
@@ -425,9 +423,9 @@ augroup MyGolang
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
-  autocmd FileType go nmap <Leader>t <Plug>(lsp-definition)<CR>
+  autocmd FileType go nnoremap <Leader>t :<C-u>vsplit<Space>\| :LspDefinition<CR>
   autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
-  autocmd FileType go nnoremap <Leader>v :<C-u>vsplit<Space>\| :LspDefinition<CR>
+  autocmd FileType go nmap <Leader>h :LspHover<CR>
 
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
