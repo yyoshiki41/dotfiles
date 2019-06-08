@@ -105,17 +105,18 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 
 ### Alias ###
 # global alias
+alias -g F='| fx'
 alias -g G='| ag'
 alias -g H='| head'
 alias -g J='| jq .'
 alias -g L='| less'
 alias -g P='| pbcopy'
+alias -g T='| tail'
 # command
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
-alias m='man'
+alias m='mv'
 alias whi='which'
-alias jq='jq -C'
 alias br='brew'
 alias bu='bundle'
 alias dc='docker'
@@ -123,6 +124,8 @@ alias cdg='cd $GOPATH/src/github.com'
 alias gg='go get'
 alias gq='ghq get'
 alias tf='terraform'
+# jq
+alias jq='jq -C'
 # echo formatted $PATH
 alias path='echo -e ${PATH//:/\\n}'
 # open
@@ -152,24 +155,15 @@ alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias lsw='(){ la $(which $1) }'
+# cat
+alias c='cat'
 # bat
 alias b='bat'
 alias bR='bat README.md'
 # tar
 alias tarc='tar cvfz' # Create a new archive
 alias tarx='tar xvfz' # Extract to disk from the archive
-
-# expand childa to $HOME {{{
-function expand-to-home() {
-  if [ "$LBUFFER" = "" ] || [ "$LBUFFER[-1]" = " " ]; then
-    LBUFFER+="~/"
-  else
-    zle self-insert
-  fi
-}
-zle -N expand-to-home
-bindkey "\\" expand-to-home
-# }}}
+alias -s gz='tar -xzvf' # Extract to disk from the archive
 
 # for direnv
 if which direnv > /dev/null; then
