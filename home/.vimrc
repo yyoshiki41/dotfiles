@@ -343,10 +343,12 @@ let g:ale_linters = {
 \}
 " fixers settings
 let g:ale_fixers = {
+\   'python': ['isort'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'json': ['prettier'],
-\   'python': ['isort'],
+\   'yaml': ['prettier'],
+\   'markdown': ['prettier'],
 \}
 let g:ale_fix_on_save = 1
 
@@ -423,13 +425,13 @@ augroup MyGolang
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
-  autocmd FileType go nnoremap <Leader>t :<C-u>vsplit<Space>\| :LspDefinition<CR>
+  autocmd FileType go nnoremap <Leader>t :LspDefinition<CR>
   autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
   autocmd FileType go nmap <Leader>h :LspHover<CR>
 
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
-  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+  autocmd FileType go nmap <Leader>m <Plug>(go-metalinter)
 
   autocmd FileType go nmap <Leader>gi <Plug>(go-iferr)
   autocmd FileType go nmap <Leader>go <Plug>(go-run)
@@ -464,3 +466,16 @@ nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
 nnoremap <silent> <C-g><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
+
+" --- easy-motion ---
+" Disable default mappings
+let g:EasyMotion_do_mapping = 0
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+vmap s <Plug>(easymotion-bd-f2)
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
