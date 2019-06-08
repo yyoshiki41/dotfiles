@@ -9,6 +9,15 @@ build = 'make'
 repo = 'w0rp/ale'
 
 [[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]]
 repo = 'pearofducks/ansible-vim'
 on_ft = ['yaml', 'yml', 'j2']
 
