@@ -161,6 +161,8 @@ nnoremap <Leader>q :q<CR>
 " buffer
 nnoremap <silent> <Leader>p :bp<CR>
 nnoremap <silent> <Leader>n :bn<CR>
+" +file_in_path
+nnoremap <silent> <Leader>gf <C-w>gf<CR>
 
 " --- vimgrep ---
 " open quickfix-window
@@ -370,6 +372,11 @@ let g:markdown_fenced_languages = [
 let g:previm_open_cmd = 'open -a "Google Chrome.app"'
 nnoremap <silent> <Leader>mp :<C-u>PrevimOpen<CR>
 
+" --- json ---
+autocmd FileType json setlocal foldmethod=syntax foldlevel=2
+" --- yaml ---
+autocmd FileType yaml setlocal foldmethod=indent
+
 " --- shell ---
 augroup MyShell
   autocmd!
@@ -448,6 +455,8 @@ augroup MyJavaScript
   autocmd FileType javascript setlocal shiftwidth=2
   autocmd FileType javascript setlocal expandtab
   autocmd FileType javascript setlocal cindent
+
+  autocmd FileType vue syntax sync fromstart
 augroup END
 
 " --- hclfmt ---
