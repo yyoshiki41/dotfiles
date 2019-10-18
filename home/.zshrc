@@ -131,7 +131,6 @@ alias path='echo -e ${PATH//:/\\n}'
 # open
 alias o='open'
 alias oo='open .'
-alias oc='open -a "Google Chrome.app"'
 # hub
 eval "$(hub alias -s)"
 alias hb='hub browse --'
@@ -164,6 +163,14 @@ alias bR='bat README.md'
 alias tarc='tar cvfz' # Create a new archive
 alias tarx='tar xvfz' # Extract to disk from the archive
 alias -s gz='tar -xzvf' # Extract to disk from the archive
+
+# Google Chrome
+alias oc='open -a "Google Chrome.app"'
+function s () {
+open -a "Google Chrome.app" \
+    "https://www.google.com/search?q= $1"
+    echo "Now googling $1..."
+}
 
 # for direnv
 if which direnv > /dev/null; then
@@ -275,3 +282,5 @@ bindkey '^\' peco-hub-browse-commit
 function se {
     aws ec2 describe-instances --output text --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value|[0],InstanceId,PrivateIpAddress,PublicIpAddress,State.Name]' 2> /dev/null | peco
 }
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
