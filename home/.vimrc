@@ -432,10 +432,13 @@ augroup MyGolang
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
-  autocmd FileType go nnoremap <Leader>t :LspDefinition<CR>
-  autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
-  autocmd FileType go nmap <Leader>h :LspHover<CR>
+  autocmd FileType go nmap <C-[> :GoDef<CR>
+  autocmd FileType go nmap <C-t> :GoDefPop<CR>
 
+  autocmd FileType go nnoremap <Leader>t :LspDefinition<CR>
+  autocmd FileType go nnoremap <Leader>h :LspHover<CR>
+  autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
   autocmd FileType go nmap <Leader>m <Plug>(go-metalinter)
@@ -469,8 +472,8 @@ nnoremap <silent> <Leader>u :<C-u>Denite<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>r :<C-u>Denite -resume<CR>
 " file
-nnoremap <silent> <C-o> :<C-u>Denite file_rec<CR>
-nnoremap <silent> <C-O> :<C-u>Denite file_mru<CR>
+"nnoremap <silent> <C-o> :<C-u>Denite file_rec<CR>
+"nnoremap <silent> <C-O> :<C-u>Denite file_mru<CR>
 nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
