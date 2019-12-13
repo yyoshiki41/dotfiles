@@ -177,7 +177,7 @@ nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 
 " --- tabline ---
 " open tabe edit
-nnoremap tt :<C-u>tabe<Space>
+nnoremap :: :<C-u>tabe<Space>
 " open tabe using peco
 function! PecoOpen()
   for filename in split(system("ag -l | peco"), "\n")
@@ -257,7 +257,7 @@ endif
 
 " ---command-line---
 " アクティブなバッファのpath展開
-cnoremap <expr> tt getcmdtype() == ':' ? expand('%:h').'/' : 'tt'
+cnoremap <expr> ;; getcmdtype() == ':' ? expand('%:h').'/' : ';;'
 " emacs key bindings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -348,6 +348,7 @@ let g:ale_fixers = {
 \   'python': ['isort'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
+\   'vue': ['prettier'],
 \   'json': ['prettier'],
 \   'yaml': ['prettier'],
 \   'markdown': ['prettier'],
@@ -458,8 +459,6 @@ augroup MyJavaScript
   autocmd FileType javascript setlocal shiftwidth=2
   autocmd FileType javascript setlocal expandtab
   autocmd FileType javascript setlocal cindent
-
-  autocmd FileType vue syntax sync fromstart
 augroup END
 
 " --- hclfmt ---
@@ -468,13 +467,9 @@ let g:tf_fmt_autosave = 1
 let g:nomad_fmt_autosave = 0
 
 " --- denite.nvim ---
-nnoremap <silent> <Leader>u :<C-u>Denite<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>r :<C-u>Denite -resume<CR>
-" file
-"nnoremap <silent> <C-o> :<C-u>Denite file_rec<CR>
-"nnoremap <silent> <C-O> :<C-u>Denite file_mru<CR>
-nnoremap <silent> <C-d> :<C-u>DeniteBufferDir file_rec<CR>
+nnoremap <silent> <Leader>u :<C-u>Denite file_mru<CR>
 " grep
 nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
 nnoremap <silent> <C-g><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>

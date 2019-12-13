@@ -43,7 +43,3 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_ft = ['go']
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = ['vue']
