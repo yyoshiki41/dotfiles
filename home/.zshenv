@@ -3,6 +3,8 @@ export PATH=/usr/local/sbin:$PATH
 
 # yarn
 export PATH="$(yarn global bin):$PATH"
+# cwd/node_modules/.bin
+export PATH="./node_modules/.bin:$PATH"
 
 # mysql 5.7
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
