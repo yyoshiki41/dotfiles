@@ -47,3 +47,6 @@ on_ft = ['go']
 [[plugins]]
 repo = 'tomlion/vim-solidity'
 on_ft = ['sol']
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'

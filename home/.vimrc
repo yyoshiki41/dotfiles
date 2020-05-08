@@ -486,3 +486,14 @@ vmap s <Plug>(easymotion-bd-f2)
 " Move to line
 map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
+
+" --- open-browser.vim ---
+let g:openbrowser_search_engines = {
+\   'github': 'https://github.com/search?q={query}',
+\   'translate-ja': 'https://translate.google.co.jp/?hl=ja#view=home&op=translate&sl=en&tl=ja&text={query}',
+\}
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+nmap <C-@> <Plug>(openbrowser-smart-search)
+nnoremap <C-w> :<C-u>execute 'OpenBrowserSearch -translate-ja' expand('<cWORD>')<CR>
