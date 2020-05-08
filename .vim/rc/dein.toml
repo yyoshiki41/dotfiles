@@ -43,3 +43,7 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_ft = ['go']
+
+[[plugins]]
+repo = 'tomlion/vim-solidity'
+on_ft = ['sol']
