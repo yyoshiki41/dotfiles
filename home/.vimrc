@@ -433,7 +433,7 @@ augroup MyGolang
   autocmd FileType go :highlight goExtraVars cterm=bold ctermfg=136
   autocmd FileType go :match goExtraVars /\<ok\>\|\<err\>/
 
-  autocmd FileType go nmap <C-[> :GoDef<CR>
+  autocmd FileType go nnoremap <C-[> :GoDef<CR>
   autocmd FileType go nmap <C-t> :GoDefPop<CR>
 
   autocmd FileType go nnoremap <Leader>t :LspDefinition<CR>
