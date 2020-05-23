@@ -177,6 +177,10 @@ if which direnv > /dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
+# aws cli completion
+if type aws_zsh_completer.sh > /dev/null; then
+    source "$(which aws_zsh_completer.sh)"
+fi
 
 ### peco ###
 # history
