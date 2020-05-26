@@ -107,11 +107,15 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 # global alias
 alias -g F='| fx'
 alias -g G='| ag'
-alias -g H='| head'
+alias -g H='help'
+alias -g HH='--help'
+alias -g hd='| head'
 alias -g J='| jq .'
 alias -g L='| less'
 alias -g P='| pbcopy'
 alias -g T='| tail'
+# view STDOUT with less (e.g. aws s3 cp s3://foo.csv SL)
+alias -g SL="- | less"
 # command
 alias v='/usr/local/bin/vim'
 alias g='/usr/local/bin/git'
@@ -159,10 +163,15 @@ alias c='cat'
 # bat
 alias b='bat'
 alias bR='bat README.md'
+alias -s md=bat
+alias -s json=bat
+alias -s toml=bat
+alias -s yaml=bat
+alias -s yml=bat
 # tar
 alias tarc='tar cvfz' # Create a new archive
 alias tarx='tar xvfz' # Extract to disk from the archive
-alias -s gz='tar -xzvf' # Extract to disk from the archive
+alias -s gz='tar -xzvf'
 
 # Google Chrome
 alias oc='open -a "Google Chrome.app"'
