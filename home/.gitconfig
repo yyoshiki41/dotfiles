@@ -69,6 +69,7 @@
         ps  = push
         pso = push origin
         psd = push develop
+        psf = push --force-with-lease
 # pull (pl)
         pl   = pull
         plo  = pull origin
