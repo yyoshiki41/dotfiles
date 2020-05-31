@@ -461,10 +461,8 @@ augroup MyJavaScript
   autocmd FileType javascript setlocal cindent
 augroup END
 
-" --- hclfmt ---
-let g:hcl_fmt_autosave = 1
-let g:tf_fmt_autosave = 1
-let g:nomad_fmt_autosave = 0
+" --- terraform fmt ---
+let g:terraform_fmt_on_save=1
 
 " --- denite.nvim ---
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
