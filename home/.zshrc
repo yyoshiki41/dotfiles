@@ -107,9 +107,7 @@ export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s
 # global alias
 alias -g F='| fx'
 alias -g G='| ag'
-alias -g H='help'
-alias -g HH='--help'
-alias -g hd='| head'
+alias -g H='| head'
 alias -g J='| jq .'
 alias -g L='| less'
 alias -g P='| pbcopy'

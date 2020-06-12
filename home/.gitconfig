@@ -6,6 +6,8 @@
 [color]
 	ui = true
 	diff = always
+[pull]
+	ff = only
 [filter "media"]
 	required = true
 	clean = git media clean %f
