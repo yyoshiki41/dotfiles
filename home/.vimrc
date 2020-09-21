@@ -418,15 +418,6 @@ let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
 let g:go_highlight_operators = 0
 
-" gopls + vim-lsp
-"if executable('gopls')
-"    au User lsp_setup call lsp#register_server({
-"        \ 'name': 'gopls',
-"        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-"        \ 'whitelist': ['go'],
-"        \ })
-"endif
-
 augroup MyGolang
   autocmd!
 
