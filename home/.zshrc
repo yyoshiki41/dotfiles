@@ -134,13 +134,11 @@ alias path='echo -e ${PATH//:/\\n}'
 alias o='open'
 alias oo='open .'
 # hub
-eval "$(hub alias -s)"
-alias hb='hub browse --'
-alias hbc='hub browse -- commits'
-alias hbp='hub browse -- pulls'
-alias hbi='hub browse -- issues'
-alias hbb='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f 2,3) }'
-alias hc='hub compare'
+alias ghb='gh repo view --web'
+alias ghp='gh pr list --web'
+alias ghc='gh pr create --web'
+alias ghi='gh issue list --web'
+alias ghrp='(){ gh repo view $(ghq list | peco --query "$*" | cut -d "/" -f 2,3) --web }'
 # grep
 alias gr='grep'
 alias ggr='git grep'
