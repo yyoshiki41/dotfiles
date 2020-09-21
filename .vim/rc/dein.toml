@@ -45,6 +45,15 @@ repo = 'prabirshrestha/vim-lsp'
 on_ft = ['go']
 
 [[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
 repo = 'tomlion/vim-solidity'
 on_ft = ['sol']
 
