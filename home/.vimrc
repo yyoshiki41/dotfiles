@@ -5,6 +5,9 @@ syntax on
 " --- dein.vim ---
 execute "source ~/.vimrc.dein"
 
+" --- deoplete.nvim ---
+let g:deoplete#enable_at_startup = 1
+
 filetype indent on
 filetype plugin on
 " Indicate fast terminal conn for faster redraw
