@@ -178,7 +178,7 @@ open -a "Google Chrome.app" \
     echo "Now googling $1..."
 }
 # history
-function h () {
+function chrome-history-fzf () {
   local cols sep google_history open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
@@ -197,6 +197,8 @@ function h () {
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
+zle -N chrome-history-fzf
+bindkey '^y' chrome-history-fzf
 
 # for direnv
 if which direnv > /dev/null; then
