@@ -205,9 +205,15 @@ if which direnv > /dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
-# aws cli completion
+# aws cli completion (v1)
 if type aws_zsh_completer.sh > /dev/null; then
     source "$(which aws_zsh_completer.sh)"
+fi
+
+# aws cli completion (v2)
+if [ -f "/usr/local/bin/aws_completer" ]; then
+    autoload bashcompinit && bashcompinit
+    complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 ### peco ###
