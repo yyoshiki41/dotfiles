@@ -6,7 +6,7 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 
 [[plugins]]
 repo = 'roxma/nvim-yarp'
@@ -36,12 +36,23 @@ repo = 'ekalinin/Dockerfile.vim'
 on_ft = ['Dockerfile', 'dockerfile']
 
 [[plugins]]
-repo = 'MaxMEllon/vim-jsx-pretty'
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
+
+[[plugins]]
+repo = 'yuezk/vim-js'
 on_ft = ['javascript']
 
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript']
+repo = 'pangloss/vim-javascript'
+on_ft = ['javascript']
+hook_add = '''
+let g:jsx_ext_required = 0
+'''
+
+[[plugins]]
+repo = 'MaxMEllon/vim-jsx-pretty'
+on_ft = ['javascript']
 
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -58,10 +69,6 @@ repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'tomlion/vim-solidity'
-on_ft = ['sol']
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
