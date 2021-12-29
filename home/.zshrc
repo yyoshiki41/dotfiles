@@ -18,20 +18,8 @@ autoload -U colors && colors
 autoload -Uz add-zsh-hook
 
 ### prompt ###
-ps_exit="\\(^o^)/"
-function precmd_01() {
-    if [ "$?" -ne 0 ]; then
-        ps_exit="/(T_T)\\"
-    else
-        ps_exit="\\(^o^)/"
-    fi
-}
-
-add-zsh-hook precmd precmd_01
-PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]$ '
 # vcs_info
 autoload -Uz vcs_info
-# [current directory][git status]
 RPROMPT="%{${fg[cyan]}%}[%~]%{${reset_color}%}"
 setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -42,7 +30,18 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
 function precmd () {
     vcs_info
 }
+# [git status][current directory]
 RPROMPT='${vcs_info_msg_0_}'$RPROMPT
+ps_exit="\\(^o^)/"
+function precmd_01() {
+    if [ "$?" -ne 0 ]; then
+        ps_exit="/(T_T)\\"
+    else
+        ps_exit="\\(^o^)/"
+    fi
+}
+add-zsh-hook precmd precmd_01
+PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]$ '
 
 # List direcory contents
 export LSCOLORS=cxfxgxdxbxeghdabagacad
@@ -115,7 +114,7 @@ alias -g T='| tail'
 # view STDOUT with less (e.g. aws s3 cp s3://foo.csv SL)
 alias -g SL="- | less"
 # command
-alias v='/usr/local/bin/vim'
+alias v='/usr/local/bin/nvim'
 alias g='/usr/local/bin/git'
 alias m='mv'
 alias whi='which'
@@ -243,7 +242,7 @@ bindkey '^z' peco-z
 function peco-file() {
     local filepath=$(ag -l | peco --query "$BUFFER")
     if [ -n "$filepath" ]; then
-        BUFFER="vim $filepath"
+        BUFFER="nvim $filepath"
         zle accept-line
     fi
 }
@@ -255,7 +254,7 @@ function peco-file-ag() {
     if [ -n "$BUFFER" ]; then
         local filepath=$(ag -l "$BUFFER" | peco)
         if [ -n "$filepath" ]; then
-            BUFFER="vim $filepath"
+            BUFFER="nvim $filepath"
             zle accept-line
         fi
     fi
@@ -280,9 +279,7 @@ bindkey '^t' peco-ghq-cd
 function peco-hub-browse-file() {
     local filepath=$(ag -l | peco --query "$LBUFFER")
     if [ -n "$filepath" ]; then
-        branch=$(git rev-parse --abbrev-ref HEAD)
-        prefix=$(git rev-parse --show-prefix)
-        BUFFER="hub browse -- tree/$branch/$prefix/$filepath"
+        BUFFER="gh browse -- $filepath"
         zle accept-line
     fi
     zle redisplay
@@ -295,7 +292,7 @@ function peco-hub-browse-issues() {
     local res=$(hub issue 2> /dev/null | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
         n=`echo ${res/]*/}`
-        BUFFER="hub browse -- issues/$n"
+        BUFFER="gh browse -- issues/$n"
         zle accept-line
     fi
     zle redisplay
@@ -308,7 +305,8 @@ function peco-hub-browse-commit() {
     local res=$(git log --oneline --no-color | peco --query "$LBUFFER")
     if [ -n "$res" ]; then
         h=$(echo "$res" | cut -d " " -f 1)
-        BUFFER="hub browse -- commit/$h"
+        u=$(gh browse -n)
+        BUFFER="open $u/commit/$h"
         zle accept-line
     fi
     zle redisplay
@@ -322,6 +320,20 @@ function se {
 }
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# defer initialization of nvm
+if [ -s "/usr/local/opt/nvm/nvm.sh" ] && [ ! "$(type -w __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    source "/usr/local/opt/nvm/nvm.sh"
+    echo "node-dependent command is run! (node $(node --version))"
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

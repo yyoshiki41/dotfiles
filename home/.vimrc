@@ -12,10 +12,10 @@ filetype indent on
 filetype plugin on
 " Indicate fast terminal conn for faster redraw
 set ttyfast
-" Indicate terminal type for mouse codes
-set ttymouse=xterm2
-" Speedup scrolling
-set ttyscroll=3
+if !has('nvim')
+  set ttymouse=xterm2 " Indicate terminal type for mouse codes
+  set ttyscroll=3 " Speedup scrolling
+endif
 " 前回終了時のcursor 位置で起動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 " Create the directory which a new file will reside in
@@ -345,6 +345,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 " linters settings
 let g:ale_linters = {
 \   'go': [''],
+\   'sh': ['shellcheck', 'language_server'],
 \}
 " fixers settings
 let g:ale_fixers = {
@@ -396,6 +397,7 @@ au FileType go compiler go
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
+" automatically highlight variable your cursor is on
 let g:go_auto_sameids = 0
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
@@ -410,6 +412,7 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
