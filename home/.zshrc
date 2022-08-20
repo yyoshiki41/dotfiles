@@ -16,6 +16,9 @@ bindkey -e
 autoload -U colors && colors
 # zsh hooks
 autoload -Uz add-zsh-hook
+# cdr
+autoload -Uz chpwd_recent_dirs cdr
+add-zsh-hook chpwd chpwd_recent_dirs
 
 ### prompt ###
 # vcs_info
@@ -114,7 +117,8 @@ alias -g T='| tail'
 # view STDOUT with less (e.g. aws s3 cp s3://foo.csv SL)
 alias -g SL="- | less"
 # command
-alias v='/usr/local/bin/nvim'
+alias v='/usr/local/bin/vim'
+alias n='/usr/local/bin/nvim'
 alias g='/usr/local/bin/git'
 alias m='mv'
 alias whi='which'
@@ -176,8 +180,27 @@ open -a "Google Chrome.app" \
     "https://www.google.com/search?q= $1"
     echo "Now googling $1..."
 }
-# history
-function chrome-history-fzf () {
+
+# for direnv
+if which direnv > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
+# aws cli completion (v1)
+if type aws_zsh_completer.sh > /dev/null; then
+    source "$(which aws_zsh_completer.sh)"
+fi
+# aws cli completion (v2)
+if [ -f "/usr/local/bin/aws_completer" ]; then
+    autoload bashcompinit && bashcompinit
+    complete -C '/usr/local/bin/aws_completer' aws
+fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview-window right:40%'
+# chrome history
+function fzf-chrome-history () {
   local cols sep google_history open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
@@ -196,24 +219,46 @@ function chrome-history-fzf () {
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
-zle -N chrome-history-fzf
-bindkey '^y' chrome-history-fzf
-
-# for direnv
-if which direnv > /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
-# aws cli completion (v1)
-if type aws_zsh_completer.sh > /dev/null; then
-    source "$(which aws_zsh_completer.sh)"
-fi
-
-# aws cli completion (v2)
-if [ -f "/usr/local/bin/aws_completer" ]; then
-    autoload bashcompinit && bashcompinit
-    complete -C '/usr/local/bin/aws_completer' aws
-fi
+zle -N fzf-chrome-history
+bindkey '^y' fzf-chrome-history
+# tree + fzf --preview
+function tree_select() {
+  tree -N -a --charset=o -f --gitignore -I '.git'| \
+    fzf --preview 'f() {
+      set -- $(echo -- "$@" | grep -o "\./.*$");
+      if [ -d $1 ]; then
+        ls -lh $1
+      else
+        head -n 100 $1
+      fi
+    }; f {}' | \
+      sed -e "s/ ->.*\$//g" | \
+      tr -d '\||`| ' | \
+      tr '\n' ' ' | \
+      sed -e "s/--//g" | \
+      xargs echo
+}
+function open_from_tree(){
+  local selected_file=$(tree_select)
+  if [ -n "$selected_file" ]; then
+    BUFFER="nvim $selected_file"
+  fi
+  zle accept-line
+}
+zle -N open_from_tree
+bindkey "^o" open_from_tree
+# fzf + cdr
+function select_cdr(){
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | \
+      fzf --preview 'f() { sh -c "ls -h $1" }; f {}')
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N select_cdr
+bindkey '^w' select_cdr
 
 ### peco ###
 # history
@@ -239,16 +284,6 @@ zle -N peco-z
 bindkey '^z' peco-z
 
 # vim
-function peco-file() {
-    local filepath=$(ag -l | peco --query "$BUFFER")
-    if [ -n "$filepath" ]; then
-        BUFFER="nvim $filepath"
-        zle accept-line
-    fi
-}
-zle -N peco-file
-bindkey '^o' peco-file
-
 # ag + vim
 function peco-file-ag() {
     if [ -n "$BUFFER" ]; then
@@ -314,11 +349,6 @@ function peco-hub-browse-commit() {
 zle -N peco-hub-browse-commit
 bindkey '^\' peco-hub-browse-commit
 
-# peco + aws ec2 describe-instances
-function se {
-    aws ec2 describe-instances --output text --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value|[0],InstanceId,PrivateIpAddress,PublicIpAddress,State.Name]' 2> /dev/null | peco
-}
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # defer initialization of nvm
@@ -335,5 +365,4 @@ if [ -s "/usr/local/opt/nvm/nvm.sh" ] && [ ! "$(type -w __init_nvm)" = function 
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
