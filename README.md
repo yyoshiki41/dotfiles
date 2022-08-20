@@ -1,11 +1,11 @@
-dotfiles
-========
+# dotfiles
 
 ## ★Recipe★
 
 ### 1. Create ~/.gitconfig_local
 
 > ex)　~/.gitconfig_local
+
   <pre>
     [user]
         name = gitUser
@@ -28,7 +28,8 @@ $ make init
 ## Appendix
 
 ### ■ For vim-latex
-*Load .vimrc.tex*
+
+_Load .vimrc.tex_
 
 ```bash
 " For vim-latex
