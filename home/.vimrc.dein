@@ -21,6 +21,7 @@ if dein#check_install()
   call dein#install()
 endif
 
+" Check lazy plugins
 function! s:check_lazy_plugins() abort
   let check_lazy_plugins = dein#check_lazy_plugins()
   if len(check_lazy_plugins) > 0
