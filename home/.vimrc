@@ -5,9 +5,6 @@ syntax on
 " --- dein.vim ---
 execute "source ~/.vimrc.dein"
 
-" --- deoplete.nvim ---
-let g:deoplete#enable_at_startup = 1
-
 filetype indent on
 filetype plugin on
 " Indicate fast terminal conn for faster redraw
@@ -134,13 +131,19 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 " space でwindow移動
-nnoremap <S-SPACE> <PageUp>
-nnoremap <SPACE> <PageDown>
+nnoremap <S-Space> <PageUp>
+nnoremap <Space> <PageDown>
 " scroll 時の余白行数
 set scrolloff=5
 " 0 で行頭, 9で行末
 nnoremap 0 ^
 nnoremap 9 $
+" 表示行の上下に移動
+nmap gj gj<SID>g
+nmap gk gk<SID>g
+nnoremap <script> <SID>gj gj<SID>g
+nnoremap <script> <SID>gk gk<SID>g
+nmap <SID>g <Nop>
 " Go to newer cursor position in jump list using tab keyboard
 nnoremap <Tab> %
 vnoremap <Tab> %
@@ -181,13 +184,9 @@ nnoremap vhead :vim<Space>/^<\+\sHEAD$/<Space>
 " --- tabline ---
 " open tabe edit
 nnoremap :: :<C-u>tabe<Space>
-" open tabe using peco
-function! PecoOpen()
-  for filename in split(system("ag -l | peco"), "\n")
-    execute "tabe" filename
-  endfor
-endfunction
-nnoremap <Leader>o :call PecoOpen()<CR>
+nnoremap tt :<C-u>tabe<Space>
+" move tab  ※(引数+1)番目にtabを移動
+nnoremap tm :<C-u>tabm<Space>
 " show tabline
 set showtabline=2
 function! s:SID_PREFIX()
@@ -211,15 +210,15 @@ function! s:tabline()  "{{{
 endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'tabline()'
 " t* でtab移動
-nnoremap <silent> <C-m> gt
-nnoremap <silent> <C-n> gT
+nnoremap <silent> <C-n> gt
+" C-m を当てたいが効かない
+nnoremap <C-m> gT
+nnoremap <silent> <C-s> gT
 nnoremap <silent> tf :tabfirst<CR>
 nnoremap <silent> tl :tablast<CR>
 for n in range(1, 9)
   execute 'nnoremap <silent> t'.n  ':<C-u>tabnext'.n.'<CR>'
 endfor
-" move tab  ※(引数+1)番目にtabを移動
-nnoremap tm :<C-u>tabm<Space>
 " --- window ---
 " Put the new window below the current one
 set splitbelow
@@ -332,6 +331,52 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
+" --- dinhhuy258/git.nvim ---
+if has('nvim')
+lua <<EOF
+require('git').setup(
+{
+  keymaps = {
+    -- Open blame window
+    blame = "<Leader>bl",
+    -- Open file/folder in git repository
+    browse = "<Leader>go",
+  }
+})
+EOF
+endif
+
+" --- lewis6991/gitsigns.nvim ---
+if has('nvim')
+lua <<EOF
+require('gitsigns').setup {}
+EOF
+endif
+
+" --- nvim-treesitter ---
+if has('nvim')
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "graphql",
+    "javascript",
+    "typescript",
+    "vue",
+    "tsx",
+    "css",
+    "scss",
+    "sql",
+    "lua",
+    "gomod",
+    "gitignore",
+  },
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+endif
+
 " --- ale ---
 let g:ale_sign_column_always = 1
 let g:ale_set_loclist = 0
@@ -343,21 +388,40 @@ nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 let g:ale_javascript_prettier_use_local_config = 1
 " linters settings
+let g:ale_linter_aliases = {
+\   'vue': ['vue', 'javascript'],
+\   'jsx': ['css', 'javascript'],
+\}
 let g:ale_linters = {
 \   'go': [''],
-\   'sh': ['shellcheck', 'language_server'],
+\   'vue': ['eslint', 'vls', 'volar'],
+\   'jsx': ['stylelint', 'eslint'],
 \}
 " fixers settings
 let g:ale_fixers = {
+\   'sh': ['shfmt'],
 \   'python': ['isort'],
+\   'graphql': ['prettier'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'vue': ['prettier'],
+\   'jsx': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'javascriptreact': ['prettier'],
 \   'json': ['prettier'],
 \   'yaml': ['prettier'],
 \   'markdown': ['prettier'],
+\   'sql': ['pgformatter'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_sh_shfmt_options='-i 2'
+
+" --- vim-lsp ---
+autocmd FileType * nnoremap <Leader>t :LspDefinition<CR>
+autocmd FileType * nnoremap <Leader>v :<C-u>vs<Space>\| :LspDefinition<CR>
+autocmd FileType * nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
+autocmd FileType * nnoremap <Leader>r :LspReferences<CR>
+autocmd FileType * nnoremap <Leader>h :LspHover<CR>
 
 " --- markdown ---
 set syntax=markdown
@@ -403,7 +467,6 @@ let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
 let g:go_def_mode = "gopls"
 let g:go_metalinter_enabled = ['vet', 'golint']
-"let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['golint', 'vet']
 
@@ -417,12 +480,12 @@ let g:go_highlight_methods = 1
 let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 0
-" Highlights predefined identifier such as `nil`, `iota`
-hi link goPredefinedIdentifiers Identifier
 " Don't enable these options because vim becomes slow.
 let g:go_highlight_structs = 0
 let g:go_highlight_interfaces = 0
 let g:go_highlight_operators = 0
+" Highlights predefined identifier such as `nil`, `iota`
+hi link goPredefinedIdentifiers Identifier
 
 augroup MyGolang
   autocmd!
@@ -433,16 +496,14 @@ augroup MyGolang
   autocmd FileType go nnoremap <C-[> :GoDef<CR>
   autocmd FileType go nmap <C-t> :GoDefPop<CR>
 
-  autocmd FileType go nnoremap <Leader>t :LspDefinition<CR>
-  autocmd FileType go nnoremap <Leader>h :LspHover<CR>
-  autocmd FileType go nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
   autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <Leader>e <Plug>(go-vet)
+  autocmd FileType go nmap <Leader>c <Plug>(go-callers)
+  autocmd FileType go nmap <Leader>r <Plug>(go-referrers)
   autocmd FileType go nmap <Leader>i <Plug>(go-implements)
-  autocmd FileType go nmap <Leader>m <Plug>(go-metalinter)
 
   autocmd FileType go nmap <Leader>gi <Plug>(go-iferr)
-  autocmd FileType go nmap <Leader>go <Plug>(go-run)
+  "autocmd FileType go nmap <Leader>go <Plug>(go-run)
   autocmd FileType go nmap <Leader>gb <Plug>(go-build)
   autocmd FileType go nmap <Leader>gs <Plug>(go-test)
 
@@ -461,13 +522,13 @@ augroup END
 " --- terraform fmt ---
 let g:terraform_fmt_on_save=1
 
-" --- denite.nvim ---
-nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>r :<C-u>Denite -resume<CR>
-nnoremap <silent> <Leader>u :<C-u>Denite file_mru<CR>
+" --- fzf.vim ---
+let $FZF_DEFAULT_OPTS="--layout=reverse"
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-o> :Files<CR>
 " grep
-nnoremap <silent> <C-g>      :<C-u>Denite grep -buffer-name=search-buffer<CR>
-nnoremap <silent> <C-g><C-w> :<C-u>DeniteCursorWord grep -buffer-name=search-buffer<CR>
+nnoremap <silent> <C-g>      :Ag<CR>
+nnoremap <silent> <C-g><C-w> :Ag <C-r><C-w><CR>
 
 " --- easy-motion ---
 " Disable default mappings
@@ -487,8 +548,6 @@ let g:openbrowser_search_engines = {
 \   'github': 'https://github.com/search?q={query}',
 \   'translate-ja': 'https://translate.google.co.jp/?hl=ja#view=home&op=translate&sl=en&tl=ja&text={query}',
 \}
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-nmap <C-@> <Plug>(openbrowser-smart-search)
-nnoremap <C-w> :<C-u>execute 'OpenBrowserSearch -translate-ja' expand('<cWORD>')<CR>
+nnoremap <Leader>m :OpenBrowserSearch<Space>
+nnoremap <Leader>M :OpenBrowserSearch<Space>-
+nnoremap <Leader>o <Plug>(openbrowser-smart-search)
