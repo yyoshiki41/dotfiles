@@ -6,22 +6,40 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+
+[[plugins]]
 repo = 'dense-analysis/ale'
 
 [[plugins]]
-repo = 'roxma/nvim-yarp'
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+hook_post_update = 'TSUpdate'
 
 [[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['go', 'javascript', 'typescript', 'vue', 'jsx', 'tsx']
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 
 [[plugins]]
-repo = 'Shougo/echodoc.vim'
+repo = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'pearofducks/ansible-vim'
@@ -36,43 +54,14 @@ repo = 'ekalinin/Dockerfile.vim'
 on_ft = ['Dockerfile', 'dockerfile']
 
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript']
-
-[[plugins]]
-repo = 'yuezk/vim-js'
-on_ft = ['javascript']
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['javascript']
-hook_add = '''
-let g:jsx_ext_required = 0
-'''
-
-[[plugins]]
-repo = 'MaxMEllon/vim-jsx-pretty'
-on_ft = ['javascript']
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_ft = ['go']
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'tyru/open-browser.vim'
-
-[[plugins]]
 repo = 'hashivim/vim-terraform'
 on_ft = ['tf', 'tfvars', 'tfstate']
+
+[[plugins]]
+repo = 'github/copilot.vim'
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+
+[[plugins]]
+repo = 'dinhhuy258/git.nvim'
