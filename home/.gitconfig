@@ -8,6 +8,8 @@
 	diff = always
 [pull]
 	ff = only
+[pager]
+	difftool = true # Use a pager for large output, just like other git commands.
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -23,6 +25,12 @@
 	insteadOf = https://github.com/
 [ghq]
 	root = ~/repos/src
+[diff]
+	tool = difftastic
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 
 [alias]
         alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
@@ -51,20 +59,23 @@
         chd = checkout develop
 # add (a)
         a  = add
-        aa = add .
+        au = add -u
+        aa = add --dry-run .
+        aaa = add .
 # diff (di)
         di = diff
         d1 = diff HEAD~
         d2 = diff HEAD~2
         d3 = diff HEAD~3
-        diw = diff --word-diff
+        dfw = diff --word-diff
+        df = difftool
 # commit (c)
         c   = commit
         ca  = commit -a
         cm  = commit -m
         cam = commit --amend
 # remove (rm)
-        rm  = remove
+        rm = remove
 # remote (rpo)
         rpo = remote prune origin
 # push (ps)
