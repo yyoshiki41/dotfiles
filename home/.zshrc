@@ -1,3 +1,4 @@
+zstyle ":completion:*:commands" rehash 1
 # language
 export LANG=ja_JP.UTF-8
 # '#' 以降をコメントとして扱う
@@ -19,6 +20,7 @@ autoload -Uz add-zsh-hook
 # cdr
 autoload -Uz chpwd_recent_dirs cdr
 add-zsh-hook chpwd chpwd_recent_dirs
+setopt nonomatch
 
 ### prompt ###
 # vcs_info
@@ -52,19 +54,20 @@ export LS_COLORS='di=32:ln=35:so=36:pi=33:ex=31:bd=34;46:cd=37;43:su=30;41:sg=30
 zstyle ':completion:*' list-colors 'di=32' 'ln=35' 'so=36' 'ex=31' 'bd=34;46' 'cd=37;43'
 
 ### zsh-completions ###
-if [ -f "${HOME}/.zsh/completions" ]; then
-    fpath=(~/.zsh/completions $fpath)
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
 fi
-if [ -f "/usr/local/share/zsh-completions" ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
+
 # enable zsh completion
 autoload -Uz compinit
 compinit -u
 # zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### zsh_history ###
 HISTFILE=$HOME/.zsh_history
@@ -96,16 +99,17 @@ zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 function chpwd() { ls -G }
 
 # z
-. "/usr/local/opt/z/etc/profile.d/z.sh"
+. "/opt/homebrew/etc/profile.d/z.sh"
 # grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='00;36'
 # less
 alias l='less'
 export LESS='-I -R -M -W'
-export LESSOPEN="| /usr/local/opt/source-highlight/bin/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| /opt/homebrew/bin/source-highlight-esc.sh %s"
 
 ### Alias ###
+export EDITOR='/opt/homebrew/bin/nvim'
 # global alias
 alias -g F='| fx'
 alias -g G='| ag'
@@ -117,9 +121,10 @@ alias -g T='| tail'
 # view STDOUT with less (e.g. aws s3 cp s3://foo.csv SL)
 alias -g SL="- | less"
 # command
-alias v='/usr/local/bin/vim'
-alias n='/usr/local/bin/nvim'
-alias g='/usr/local/bin/git'
+alias v='/opt/homebrew/bin/vim'
+alias n='/opt/homebrew/bin/nvim'
+alias g='/opt/homebrew/bin/git'
+alias w='/opt/homebrew/bin/walk'
 alias m='mv'
 alias whi='which'
 alias br='brew'
@@ -176,25 +181,10 @@ alias -s gz='tar -xzvf'
 alias oc='open -a "Google Chrome.app"'
 # search
 function s () {
-open -a "Google Chrome.app" \
-    "https://www.google.com/search?q= $1"
-    echo "Now googling $1..."
+  open -a "Google Chrome.app" \
+  "https://www.google.com/search?q= $1"
+  echo "Now googling $1..."
 }
-
-# for direnv
-if which direnv > /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
-# aws cli completion (v1)
-if type aws_zsh_completer.sh > /dev/null; then
-    source "$(which aws_zsh_completer.sh)"
-fi
-# aws cli completion (v2)
-if [ -f "/usr/local/bin/aws_completer" ]; then
-    autoload bashcompinit && bashcompinit
-    complete -C '/usr/local/bin/aws_completer' aws
-fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -352,17 +342,52 @@ bindkey '^\' peco-hub-browse-commit
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # defer initialization of nvm
-if [ -s "/usr/local/opt/nvm/nvm.sh" ] && [ ! "$(type -w __init_nvm)" = function ]; then
-  export NVM_DIR="$HOME/.nvm"
-  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn')
-  function __init_nvm() {
-    for i in "${__node_commands[@]}"; do unalias $i; done
-    source "/usr/local/opt/nvm/nvm.sh"
-    echo "node-dependent command is run! (node $(node --version))"
-    unset __node_commands
-    unset -f __init_nvm
-  }
-  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+# if [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && [ ! "$(type -w __init_nvm)" = function ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn')
+#   function __init_nvm() {
+#     for i in "${__node_commands[@]}"; do unalias $i; done
+#     source "/opt/homebrew/opt/nvm/nvm.sh"
+#     echo "node-dependent command is run! (node $(node --version))"
+#     unset __node_commands
+#     unset -f __init_nvm
+#   }
+#   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+# fi
+
+# aws cli completion (v2)
+if [ -f "/usr/local/bin/aws_completer" ]; then
+    autoload bashcompinit && bashcompinit
+    complete -C '/usr/local/bin/aws_completer' aws
 fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yoshiki.nakagawa/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yoshiki.nakagawa/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yoshiki.nakagawa/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yoshiki.nakagawa/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+
+# curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+# node
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+# pnpm
+export PNPM_HOME="/Users/yoshiki.nakagawa/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# aqua
+if command -v aqua &> /dev/null; then
+  source <(aqua completion zsh)
+fi
