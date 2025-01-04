@@ -1,15 +1,13 @@
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-# yarn
-export PATH="$(yarn global bin):$PATH"
 # cwd/node_modules/.bin
 export PATH="./node_modules/.bin:$PATH"
 # cargo
 export PATH="~/.cargo/bin:$PATH"
 
-# mysql 5.7
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+# Created by `pipx` on 2023-12-18 04:16:45
+export PATH="$PATH:~/.local/bin"
 
 # For PostgreSQL
 #export PGDATA=/usr/local/var/postgres
