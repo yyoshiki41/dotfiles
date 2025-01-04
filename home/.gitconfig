@@ -2,12 +2,12 @@
 	path = ~/.gitconfig_local
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = /usr/local/bin/vim
+	editor = /opt/homebrew/bin/vim
 [color]
 	ui = true
 	diff = always
 [pull]
-	ff = only
+	rebase = true
 [pager]
 	difftool = true # Use a pager for large output, just like other git commands.
 [filter "media"]
@@ -55,7 +55,7 @@
 # checkout (ch)
         ch  = checkout
         chb = checkout -b
-        chm = checkout master
+        chm = checkout main
         chd = checkout develop
 # add (a)
         a  = add
@@ -81,17 +81,17 @@
 # push (ps)
         ps  = push
         pso = push origin
-        psd = push develop
-        psf = push --force-with-lease
+        psf = push --force-with-lease --force-if-includes
+        psof = psf origin head
 # pull (pl)
         pl   = pull
         plo  = pull origin
         pld  = pull develop
         plr  = pull --rebase
         plod = pull origin develop
-        plom = pull origin master
+        plom = pull origin main
 # rebase (rb)
-        rbm = rebase master
+        rbm = rebase main
         rbd = rebase develop
         rbi = rebase -i
         rbH = rebase -i HEAD^^
