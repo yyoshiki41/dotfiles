@@ -46,7 +46,7 @@ set spell
 highlight clear SpellBad
 highlight SpellBad ctermbg=234 guibg=#1c1c1c
 " spell check から日本語を除外
-" set spelllang+=cjk
+set spelllang+=cjk
 fun! s:SpellConf()
   redir! => syntax
   silent syntax
@@ -68,6 +68,9 @@ augroup END
 
 " ---display---
 " colors
+if has('nvim')
+  colorscheme vim
+endif
 set t_Co=256
 " Enable modeline
 set modeline
@@ -334,14 +337,17 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 " --- dinhhuy258/git.nvim ---
 if has('nvim')
 lua <<EOF
-require('git').setup(
-{
+require('git').setup({
   keymaps = {
     -- Open blame window
     blame = "<Leader>bl",
+    -- Open blame commit
+    blame_commit = "<Leader>bc",
     -- Open file/folder in git repository
     browse = "<Leader>go",
-  }
+    -- Opens a new diff that compares against the current index
+    diff = "<Leader>gd",
+  },
 })
 EOF
 endif
@@ -349,7 +355,8 @@ endif
 " --- lewis6991/gitsigns.nvim ---
 if has('nvim')
 lua <<EOF
-require('gitsigns').setup {}
+require('gitsigns').setup()
+require('scrollbar.handlers.gitsigns').setup()
 EOF
 endif
 
@@ -358,20 +365,51 @@ if has('nvim')
 lua <<EOF
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
-    "graphql",
-    "javascript",
-    "typescript",
-    "vue",
-    "tsx",
+    "bash",
     "css",
+    "csv",
+    "cue",
+    "diff",
+    "dockerfile",
+    "git_config",
+    "git_rebase",
+    "gitattributes",
+    "gitcommit",
+    "gitignore",
+    "gomod",
+    "gosum",
+    "gotmpl",
+    "gowork",
+    "graphql",
+    "hcl",
+    "html",
+    "http",
+    "hurl",
+    "javascript",
+    "jq",
+    "json",
+    "jsonnet",
+    "lua",
+    "make",
+    "markdown",
+    "mermaid",
+    "nix",
+    "proto",
+    "regex",
+    "rego",
     "scss",
     "sql",
-    "lua",
-    "gomod",
-    "gitignore",
+    "terraform",
+    "tsv",
+    "tsx",
+    "typescript",
+    "vim",
+    "vue",
+    "yaml",
   },
   highlight = {
     enable = true,
+    disable = {"vim"},
   },
 }
 EOF
@@ -381,7 +419,10 @@ endif
 let g:ale_sign_column_always = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
+let g:ale_linters_explicit = 1
 let g:ale_echo_msg_format = '[%severity%] %linter%: %s'
+let g:ale_floating_preview = 1
+let g:ale_lsp_suggestions = 1
 
 nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>k <Plug>(ale_next_wrap)
@@ -390,33 +431,40 @@ let g:ale_javascript_prettier_use_local_config = 1
 " linters settings
 let g:ale_linter_aliases = {
 \   'vue': ['vue', 'javascript'],
-\   'jsx': ['css', 'javascript'],
+\   'typescriptreact': ['typescript'],
 \}
 let g:ale_linters = {
-\   'go': [''],
 \   'vue': ['eslint', 'vls', 'volar'],
-\   'jsx': ['stylelint', 'eslint'],
+\   'typescriptreact': ['eslint', 'prettier'],
 \}
 " fixers settings
 let g:ale_fixers = {
-\   'sh': ['shfmt'],
-\   'python': ['isort'],
 \   'graphql': ['prettier'],
 \   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'vue': ['prettier'],
-\   'jsx': ['prettier'],
-\   'typescriptreact': ['prettier'],
 \   'javascriptreact': ['prettier'],
 \   'json': ['prettier'],
-\   'yaml': ['prettier'],
+\   'jsonnet': ['jsonnetfmt'],
+\   'jsx': ['prettier'],
 \   'markdown': ['prettier'],
-\   'sql': ['pgformatter'],
+\   'proto': ['buf-format'],
+\   'python': ['isort'],
+\   'sh': ['shfmt'],
+\   'sql': ['sqlfluff'],
+\   'tsx': ['prettier'],
+\   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'vue': ['prettier'],
+\   'yaml': ['prettier'],
+\}
+let g:ale_linters_ignore = {
+\   'go': [''],
+\   'proto': [''],
 \}
 let g:ale_fix_on_save = 1
 let g:ale_sh_shfmt_options='-i 2'
 
 " --- vim-lsp ---
+let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
 autocmd FileType * nnoremap <Leader>t :LspDefinition<CR>
 autocmd FileType * nnoremap <Leader>v :<C-u>vs<Space>\| :LspDefinition<CR>
 autocmd FileType * nnoremap <Leader>s :<C-u>split<Space>\| :LspDefinition<CR>
@@ -453,7 +501,6 @@ augroup MyShell
 augroup END
 
 " --- Go ---
-au BufWritePre *.go GoFmt
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 completeopt=menu,menuone,preview
 au FileType go compiler go
 
@@ -469,6 +516,9 @@ let g:go_def_mode = "gopls"
 let g:go_metalinter_enabled = ['vet', 'golint']
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['golint', 'vet']
+let g:go_auto_sameids = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_build_constraints = 1
 
 " highlight
 let g:go_highlight_format_strings = 1
