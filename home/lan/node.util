@@ -1,6 +1,6 @@
 # node version manager
 export NVM_DIR="${HOME}/.nvm"
-if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
-  . "/usr/local/opt/nvm/nvm.sh"
+if [ -s "/opt/homebrew/opt/nvm/nvm.sh" ]; then
+  . "/opt/homebrew/opt/nvm/nvm.sh"
   nvm use v14.19.0
 fi
