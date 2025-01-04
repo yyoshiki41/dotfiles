@@ -3,7 +3,7 @@ repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'fatih/vim-go'
-on_ft = ['go']
+on_ft = ['go', 'template']
 
 [[plugins]]
 repo = 'previm/previm'

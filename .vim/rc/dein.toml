@@ -18,16 +18,11 @@ depends = 'fzf'
 repo = 'dense-analysis/ale'
 
 [[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-merged = 0
-hook_post_update = 'TSUpdate'
+repo = 'mattn/vim-lsp-settings'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['go', 'javascript', 'typescript', 'vue', 'jsx', 'tsx']
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
+# on_ft = ['go', 'javascript', 'typescript', 'vue', 'jsx', 'tsx', 'proto', 'sql']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
@@ -42,26 +37,33 @@ repo = 'easymotion/vim-easymotion'
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
-repo = 'pearofducks/ansible-vim'
-on_ft = ['yaml', 'yml', 'j2']
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml', 'tml']
-
-[[plugins]]
-repo = 'ekalinin/Dockerfile.vim'
-on_ft = ['Dockerfile', 'dockerfile']
-
-[[plugins]]
 repo = 'hashivim/vim-terraform'
 on_ft = ['tf', 'tfvars', 'tfstate']
+
+[[plugins]]
+repo = 'jjo/vim-cue'
+on_ft = ['cue']
+
+[[plugins]]
+repo = 'sebdah/vim-delve'
+on_ft = ['go']
 
 [[plugins]]
 repo = 'github/copilot.vim'
 
 [[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+hook_post_update = 'TSUpdate'
+
+[[plugins]]
 repo = 'lewis6991/gitsigns.nvim'
 
 [[plugins]]
+repo = 'petertriho/nvim-scrollbar'
+
+[[plugins]]
 repo = 'dinhhuy258/git.nvim'
+
+[[plugins]]
+repo = 'akinsho/git-conflict.nvim'
