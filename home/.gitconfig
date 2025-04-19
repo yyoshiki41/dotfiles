@@ -6,8 +6,26 @@
 [color]
 	ui = true
 	diff = always
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
 [pull]
 	rebase = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+[merge]
+        conflictstyle = zdiff3
 [pager]
 	difftool = true # Use a pager for large output, just like other git commands.
 [filter "media"]
@@ -25,6 +43,11 @@
 	insteadOf = https://github.com/
 [ghq]
 	root = ~/repos/src
+[help]
+	autocorrect = prompt
+[rerere]
+	enabled = true
+	autoupdate = true
 [diff]
 	tool = difftastic
 [difftool]

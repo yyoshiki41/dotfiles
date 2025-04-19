@@ -5,6 +5,9 @@ syntax on
 " --- dein.vim ---
 execute "source ~/.vimrc.dein"
 
+" memory
+set maxmempattern=16384
+
 filetype indent on
 filetype plugin on
 " Indicate fast terminal conn for faster redraw
@@ -249,7 +252,6 @@ inoremap <C-k> <ESC>lc$
 if &term =~ "xterm"
   let &t_ti .= "\e[?2004h"
   let &t_te .= "\e[?2004l"
-  let &pastetoggle = "\e[201~"
   function XTermPasteBegin(ret)
     set paste
     return a:ret
@@ -599,5 +601,15 @@ let g:openbrowser_search_engines = {
 \   'translate-ja': 'https://translate.google.co.jp/?hl=ja#view=home&op=translate&sl=en&tl=ja&text={query}',
 \}
 nnoremap <Leader>m :OpenBrowserSearch<Space>
-nnoremap <Leader>M :OpenBrowserSearch<Space>-
+nnoremap <Leader>M :OpenBrowserSearch<Space>
 nnoremap <Leader>o <Plug>(openbrowser-smart-search)
+
+
+" --- tiny-inline-diagnostic ---
+if has('nvim')
+lua <<EOF
+require('tiny-inline-diagnostic').setup({
+    preset = "modern"
+})
+EOF
+endif
