@@ -67,3 +67,6 @@ repo = 'dinhhuy258/git.nvim'
 
 [[plugins]]
 repo = 'akinsho/git-conflict.nvim'
+
+[[plugins]]
+repo = 'rachartier/tiny-inline-diagnostic.nvim'
