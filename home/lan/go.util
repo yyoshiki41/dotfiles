@@ -1,11 +1,4 @@
-# go version manager
-if [ -s "$HOME/.gvm/scripts/gvm" ]; then
-  source "$HOME/.gvm/scripts/gvm"
-  gvm use go1.15.2
-fi
-
 ### GOPATH ###
-# Override gvm's GOPATH setting
 export GOPATH="$HOME/repos"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOBIN:$PATH"

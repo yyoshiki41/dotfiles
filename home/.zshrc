@@ -1,5 +1,6 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+
 zstyle ":completion:*:commands" rehash 1
 # language
 export LANG=ja_JP.UTF-8
@@ -54,7 +55,7 @@ PROMPT='[%F{green}%T %F{yellow}%c ${ps_exit}%f]$ '
 export LSCOLORS=cxfxgxdxbxeghdabagacad
 export LS_COLORS='di=32:ln=35:so=36:pi=33:ex=31:bd=34;46:cd=37;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 zstyle ':completion:*' list-colors 'di=32' 'ln=35' 'so=36' 'ex=31' 'bd=34;46' 'cd=37;43'
-
+ 
 ### zsh-completions ###
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -143,7 +144,7 @@ alias path='echo -e ${PATH//:/\\n}'
 # open
 alias o='open'
 alias oo='open .'
-# hub
+# gh
 alias ghb='gh repo view --web'
 alias ghp='gh pr list --web'
 alias ghc='gh pr create --web'
@@ -372,10 +373,6 @@ if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-if command -v ngrok &>/dev/null; then
-  eval "$(ngrok completion)"
-fi
-
 # curl
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
@@ -394,7 +391,7 @@ if command -v aqua &> /dev/null; then
   source <(aqua completion zsh)
 fi
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 export PATH="$HOME/.local/bin:$PATH"
+
+# # Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

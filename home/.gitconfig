@@ -3,6 +3,14 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = /opt/homebrew/bin/vim
+[github]
+	user = yyoshiki41
+[user]
+        name = yyoshiki41
+        email = yyoshiki41@gmail.com
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [color]
 	ui = true
 	diff = always
@@ -37,10 +45,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[github]
-	user = yyoshiki41
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [ghq]
 	root = ~/repos/src
 [help]

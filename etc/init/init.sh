@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # zsh
-ln -sf ~/dotfiles/home/.zshenv ~/.zshenv
-ln -sf ~/dotfiles/home/.zprofile ~/.zprofile
-ln -sf ~/dotfiles/home/.zshrc ~/.zshrc
+ln -sf ${PWD}/home/.zshenv ~/.zshenv
+ln -sf ${PWD}/home/.zprofile ~/.zprofile
+ln -sf ${PWD}/home/.zshrc ~/.zshrc
 # Programming language
-ln -nsf ~/dotfiles/home/lan ~/.lan
+ln -nsf ${PWD}/home/lan ~/.lan
 # Create a new folder for completions
 mkdir -p ~/.zsh/completions
 
 # vim
-ln -nsf ~/dotfiles/.vim/dein.vim ~/.vim/dein.vim
-ln -nsf ~/dotfiles/.vim/rc ~/.vim/rc
-ln -sf ~/dotfiles/home/.vimrc.dein ~/.vimrc.dein
-ln -sf ~/dotfiles/home/.vimrc ~/.vimrc
+ln -nsf ${PWD}/.vim/dein.vim ~/.vim/dein.vim
+ln -nsf ${PWD}/.vim/rc ~/.vim/rc
+ln -sf ${PWD}/home/.vimrc.dein ~/.vimrc.dein
+ln -sf ${PWD}/home/.vimrc ~/.vimrc
 
 # git
-ln -sf ~/dotfiles/home/.gitignore_global ~/.gitignore_global
-ln -sf ~/dotfiles/home/.gitconfig ~/.gitconfig
+ln -sf ${PWD}/home/.gitignore_global ~/.gitignore_global
+ln -sf ${PWD}/home/.gitconfig ~/.gitconfig
