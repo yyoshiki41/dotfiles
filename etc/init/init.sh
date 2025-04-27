@@ -10,9 +10,6 @@ ln -nsf ${PWD}/home/lan ~/.lan
 mkdir -p ~/.zsh/completions
 
 # vim
-ln -nsf ${PWD}/.vim/dein.vim ~/.vim/dein.vim
-ln -nsf ${PWD}/.vim/rc ~/.vim/rc
-ln -sf ${PWD}/home/.vimrc.dein ~/.vimrc.dein
 ln -sf ${PWD}/home/.vimrc ~/.vimrc
 
 # git
