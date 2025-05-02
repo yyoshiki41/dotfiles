@@ -2,7 +2,7 @@
   "title": "slack",
   "rules": [
     {
-      "description": "Map commad + p/n to move previous/next channel or DM (unread if shift is pressed) in Slack.",
+      "description": "Map command + p/n to move previous/next channel or DM (unread if shift is pressed) in Slack.",
       "manipulators": [
         {
           "type": "basic",

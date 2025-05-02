@@ -21,8 +21,8 @@ return {
         callback = function()
           local opts = { noremap = true, silent = true }
           vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>t', ':LspDefinition<CR>', opts)
-          vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>v', ':<C-u>vs<Space>\\| :LspDefinition<CR>', opts)
-          vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>s', ':<C-u>split<Space>\\| :LspDefinition<CR>', opts)
+          vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>v', ':<C-u>vs<Space> | :LspDefinition<CR>', opts)
+          vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>s', ':<C-u>split<Space> | :LspDefinition<CR>', opts)
           vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>r', ':LspReferences<CR>', opts)
           vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>h', ':LspHover<CR>', opts)
         end
