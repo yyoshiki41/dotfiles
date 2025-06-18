@@ -180,6 +180,10 @@ alias tarc='tar cvfz' # Create a new archive
 alias tarx='tar xvfz' # Extract to disk from the archive
 alias -s gz='tar -xzvf'
 
+# claude
+alias cl="claude --dangerously-skip-permissions"
+alias claude-yolo="claude --dangerously-skip-permissions"
+
 # Google Chrome
 alias oc='open -a "Google Chrome.app"'
 # search
