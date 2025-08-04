@@ -33,7 +33,8 @@
         autoStash = true
         updateRefs = true
 [merge]
-        conflictstyle = zdiff3
+	conflictstyle = zdiff3
+	tool = vimdiff
 [pager]
 	difftool = true # Use a pager for large output, just like other git commands.
 [filter "media"]
