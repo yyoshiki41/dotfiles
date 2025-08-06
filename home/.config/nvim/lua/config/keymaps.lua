@@ -195,6 +195,15 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 ------------------
 -- プラグイン固有のキーマップ
 ------------------
+-- Overlook (popup management)
+keymap('n', '<leader>pu', function() require('overlook.api').restore_last_popup() end, { desc = 'Restore last popup' })
+keymap('n', '<leader>pU', function() require('overlook.api').restore_all() end, { desc = 'Restore all popups' })
+keymap('n', '<leader>pc', function() require('overlook.api').close_all() end, { desc = 'Close all popups' })
+keymap('n', '<leader>ps', function() require('overlook.api').open_in_split() end, { desc = 'Open popup in split' })
+keymap('n', '<leader>pv', function() require('overlook.api').open_in_vsplit() end, { desc = 'Open popup in vertical split' })
+keymap('n', '<leader>pt', function() require('overlook.api').open_in_tab() end, { desc = 'Open popup in tab' })
+keymap('n', '<leader>po', function() require('overlook.api').open_in_current_window() end, { desc = 'Open popup in current window' })
+
 -- ALE
 keymap('n', '<Leader>j', '<Plug>(ale_previous_wrap)', { silent = true })
 keymap('n', '<Leader>k', '<Plug>(ale_next_wrap)', { silent = true })
